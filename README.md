@@ -66,4 +66,4 @@ eShopMemo は、ただ商品を保存するだけのウィッシュリストで�
 - データベース：PostgreSQL 
 - 認証：GoogleアカウントによるOAuth認証（OmniAuth +  omniauth-google-oauth2） 
 - デプロイ先 : Heroku / Render / Railway などを検討中 
-- 使用予定のGem : OmniAuth / omniauth-google-oauth2 差分用の一行追記
+- 使用予定のGem : OmniAuth / omniauth-google-oauth2
