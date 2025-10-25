@@ -17,6 +17,29 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# ↓追加
+# スタイルシート
+gem 'tailwindcss-rails'
+
+# ページネーション
+gem 'kaminari'
+gem 'kaminari-i18n'
+
+# HTMLパーサー
+gem 'nokogiri'
+
+# カレンダー処理
+gem 'icalendar'
+
+# 環境変数
+gem 'dotenv-rails'
+
+group :development, :test do
+  # 開発環境でのメール確認用
+  gem 'letter_opener'
+
+end
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 

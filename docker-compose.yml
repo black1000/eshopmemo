@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:14
+    container_name: shopmemo-db
+    restart: always
+    # DB接続情報は.env.developmentから取得するように修正済み
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    expose:
+      - "5432"
+
+  web:
+    build: .
+    container_name: shopmemo-web
+    # 開発サーバー起動コマンドに変更
+    command: bundle exec rails s -p 3000 -b '0.0.0.0' # ★ 修正: 開発用コマンド
+    depends_on:
+      - db
+    # 参照する環境変数ファイルを開発用に変更
+    env_file:
+      - .env.development # ★ 修正: .env.production から .env.development へ
+    environment:
+      RAILS_ENV: development # ★ 修正: production から development へ
+      # 開発中は DATABASE_URL や SECRET_KEY_BASE は削除またはコメントアウトしてもOK (database.ymlが機能するため)
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/rails # コード変更を即座に反映させるため必要
+
+volumes:
+  pgdata:
