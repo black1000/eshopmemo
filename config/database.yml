@@ -79,7 +79,8 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
+  <<: *default
   # Renderが提供する DATABASE_URL 環境変数を使用する
   url: <%= ENV['DATABASE_URL'] %> 
   # デフォルト設定 (poolサイズなど) も引き継ぐ
-  <<: *default
+

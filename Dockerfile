@@ -39,7 +39,7 @@ RUN chmod +x bin/* && \
 
 # ★重要★ アセットのプリコンパイル
 # SECRET_KEY_BASEがないとエラーになるため、ダミー値で実行
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+RUN SECRET_KEY_BASE_DUMMY=1 DISABLE_DATABASE_ENVIRONMENT_CHECK=1 ./bin/rails assets:precompile
 
 # Final stage for app image (runtime)
 FROM base
