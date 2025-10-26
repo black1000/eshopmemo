@@ -6,7 +6,7 @@ WORKDIR /rails
 
 # Install base packages for runtime
 RUN apt-get update -qq && \
-    apt-get install -y libpq-dev nodejs npm && \
+    apt-get install -y libpq-dev postgresql-client nodejs npm && \
     npm install -g yarn && \
     rm -rf /var/lib/apt/lists/*
 
@@ -44,8 +44,14 @@ RUN chmod +x bin/* && \
 
 # 重要: アセットプリコンパイル (production 環境で DB 接続不要)
 ENV RAILS_ENV=production \
-    SECRET_KEY_BASE=1
+    SECRET_KEY_BASE=dummy_key_for_assets \
+    DATABASE_NAME=dummy \
+    DATABASE_USERNAME=dummy \
+    DATABASE_PASSWORD=dummy \
+    DATABASE_HOST=localhost \
+    DATABASE_PORT=5432
 
+# assets:precompile
 RUN bundle exec rails assets:precompile
 
 # Final runtime image

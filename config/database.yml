@@ -2,27 +2,28 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV["DATABASE_USERNAME"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
+  host: <%= ENV["DATABASE_HOST"] %>
 
 development:
   <<: *default
-  database: <%= ENV.fetch("DATABASE_NAME") %>
-  username: <%= ENV.fetch("DATABASE_USERNAME") %>
-  password: <%= ENV.fetch("DATABASE_PASSWORD") %>
-  host: <%= ENV.fetch("DATABASE_HOST") %>
-  port: <%= ENV.fetch("DATABASE_PORT", 5432) %>
+  database: shopmemo_development
 
 test:
   <<: *default
   database: shopmemo_test
-  username: <%= ENV.fetch("DATABASE_USERNAME") %>
-  password: <%= ENV.fetch("DATABASE_PASSWORD") %>
-  host: <%= ENV.fetch("DATABASE_HOST") %>
-  port: <%= ENV.fetch("DATABASE_PORT", 5432) %>
 
-production:
+production: &production
   <<: *default
-  database: <%= ENV.fetch("DATABASE_NAME") %>
-  username: <%= ENV.fetch("DATABASE_USERNAME") %>
-  password: <%= ENV.fetch("DATABASE_PASSWORD") %>
-  host: <%= ENV.fetch("DATABASE_HOST") %>
-  port: <%= ENV.fetch("DATABASE_PORT", 5432) %>
+  database: <%= ENV["DATABASE_NAME"] %>
+
+queue:
+  <<: *production
+  database: <%= ENV["DATABASE_NAME"] %>
+
+cable:
+  <<: *production
+
+cache:
+  <<: *production
