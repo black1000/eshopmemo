@@ -18,6 +18,9 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # ↓追加
+# ユーザー認証
+gem 'devise'
+
 # スタイルシート
 gem 'tailwindcss-rails'
 

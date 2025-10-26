@@ -16,7 +16,9 @@ services:
       - "5432"
 
   web:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev # （開発用Dockerfileを指定）
     container_name: shopmemo-web
     # 開発サーバー起動コマンドに変更
     command: bundle exec rails s -p 3000 -b '0.0.0.0' # ★ 修正: 開発用コマンド
@@ -30,8 +32,8 @@ services:
       # 開発中は DATABASE_URL や SECRET_KEY_BASE は削除またはコメントアウトしてもOK (database.ymlが機能するため)
     ports:
       - "3000:3000"
-    volumes:
-      - .:/rails # コード変更を即座に反映させるため必要
+    #volumes:
+     # - .:/rails:cached # コード変更を即座に反映させるため必要
 
 volumes:
   pgdata:
