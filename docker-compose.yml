@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   db:
     image: postgres:14
@@ -21,19 +19,20 @@ services:
       dockerfile: Dockerfile.dev # （開発用Dockerfileを指定）
     container_name: shopmemo-web
     # 開発サーバー起動コマンドに変更
-    command: bundle exec rails s -p 3000 -b '0.0.0.0' # ★ 修正: 開発用コマンド
+    command: bundle exec rails s -p 3000 -b '0.0.0.0' # 開発用コマンド
     depends_on:
       - db
     # 参照する環境変数ファイルを開発用に変更
     env_file:
-      - .env.development # ★ 修正: .env.production から .env.development へ
+      - .env.development # .env.production から .env.development へ
     environment:
-      RAILS_ENV: development # ★ 修正: production から development へ
+      RAILS_ENV: development # production から development へ
       # 開発中は DATABASE_URL や SECRET_KEY_BASE は削除またはコメントアウトしてもOK (database.ymlが機能するため)
     ports:
       - "3000:3000"
-    #volumes:
-     # - .:/rails:cached # コード変更を即座に反映させるため必要
+    # 開発時にコード変更を即座に反映させるため、volumesも有効化することを強くお勧めします
+    volumes:
+      - .:/rails:cached
 
 volumes:
   pgdata:
