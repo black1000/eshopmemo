@@ -312,10 +312,15 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
 
 # ==> OmniAuth の設定
-  # Google OmniAuth Provider の設定を追加
+if ENV['GOOGLE_CLIENT_ID'].present? && ENV['GOOGLE_CLIENT_SECRET'].present?
   config.omniauth :google_oauth2,
-                  ENV.fetch('GOOGLE_CLIENT_ID', nil), # nilを渡すことで、ENVに設定がない場合にエラーにならないように
-                  ENV.fetch('GOOGLE_CLIENT_SECRET', nil), 
-                  { scope: 'email, profile' } # ユーザーのメールアドレスとプロフィール情報へのアクセスを要求
-      
+                  ENV['GOOGLE_CLIENT_ID'],
+                  ENV['GOOGLE_CLIENT_SECRET'],
+                  {
+                    scope: 'email,profile',
+                    prompt: 'select_account', # これがあると複数アカウントの切り替えが安定する
+                    image_aspect_ratio: 'square',
+                    image_size: 50
+                  }
+end
 end

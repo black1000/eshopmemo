@@ -1,31 +1,26 @@
 class User < ApplicationRecord
-    # :omniauthable と omniauth_providers: [:google_oauth2] を追加
-    devise  :database_authenticatable, :registerable,
-            :recoverable, :rememberable, :validatable,
-            :omniauthable, omniauth_providers: [:google_oauth2]
 
-    # Google認証からのデータを受け取り、ユーザーを検索または新規作成する
-    def self.from_omniauth(auth)
-      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-        user.email = auth.info.email
-        # Google認証ユーザーはパスワード認証を使わないため、ランダムな値を設定
-        user.password = Devise.friendly_token[0, 20]
-        user.name = auth.info.name   # nameカラムにGoogleの表示名を設定
-        # user.image = auth.info.image # 画像URLも保存できる
-    end
-   end
+  # :omniauthable に :omniauth_providers を指定してGoogleログイン対応
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: [:google_oauth2]
 
-    # 通常のパスワードログインを試みるユーザーが、OmniAuthで登録されたユーザーと同じメールアドレスで登録しようとした場合のエラーを回避
-    def email_required?
-        super && provider.blank?
-    end
+  # GoogleからのOAuth情報をもとにユーザーを取得・作成
+  def self.from_omniauth(auth)
+    # provider と uid で既存ユーザーを探す
+    user = find_by(provider: auth.provider, uid: auth.uid)
 
-    def password_required?
-        super && provider.blank?
+    # 存在しない場合は新規作成
+    unless user
+      user = create(
+        provider: auth.provider,
+        uid: auth.uid,
+        name: auth.info.name,
+        email: auth.info.email,
+        password: Devise.friendly_token[0, 20]  # ランダムパスワード
+      )
     end
 
-    # ユーザー名が設定されていない場合はメールアドレスの@以前を使用
-    def display_name
-        name.presence || email.split('@').first
-    end
+    user
+  end
 end

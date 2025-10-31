@@ -16,21 +16,20 @@ services:
   web:
     build: 
       context: .
-      dockerfile: Dockerfile.dev # （開発用Dockerfileを指定）
+      dockerfile: Dockerfile.dev 
     container_name: shopmemo-web
-    # 開発サーバー起動コマンドに変更
-    command: bundle exec rails s -p 3000 -b '0.0.0.0' # 開発用コマンド
+    command: bundle exec rails s -p 3000 -b '0.0.0.0' 
     depends_on:
       - db
-    # 参照する環境変数ファイルを開発用に変更
+    
     env_file:
-      - .env.development # .env.production から .env.development へ
+      - .env.development 
     environment:
-      RAILS_ENV: development # production から development へ
-      # 開発中は DATABASE_URL や SECRET_KEY_BASE は削除またはコメントアウトしてもOK (database.ymlが機能するため)
+      RAILS_ENV: development 
+
     ports:
       - "3000:3000"
-    # 開発時にコード変更を即座に反映させるため、volumesも有効化することを強くお勧めします
+    
     volumes:
       - .:/rails:cached
 

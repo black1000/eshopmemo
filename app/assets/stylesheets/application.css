@@ -1,10 +1,172 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f4f9; /* 背景を薄いグレーに */
+}
+
+/* ヘッダー全体 (デザインの濃い背景) */
+.app-header {
+    background-color: #1e1e1e; /* デザイン画像の濃い色 */
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ナビゲーションバー (ロゴとリンクを左右に配置) */
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; /* 最大幅を設定して中央に寄せる */
+    margin: 0 auto;
+    padding: 15px 0;
+}
+
+/* ロゴのスタイル */
+.logo-link {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+/* ナビゲーションリンクエリア */
+.nav-links nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-item {
+    color: #c0c0c0; /* リンクの色を白に近いグレーに */
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap; /* ボタンが折り返さないように */
+}
+
+.nav-item:hover {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+/* ログイン中のステータス表示 */
+.user-info {
+    color: #4CAF50; /* ログイン中であることを示す色 */
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* --- メインコンテンツとレイアウト --- */
+.container.main-content {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.content-flex {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+ /* メモ一覧 */
+.memo-list-area {
+    flex-grow: 3;
+    padding-right: 20px;
+}
+
+/* サイドバー */
+.sidebar-area {
+    flex-grow: 1;
+    min-width: 250px;
+}
+
+.schedule-link {
+    display: block;
+    text-align: right;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #4A90E2;
+    text-decoration: none;
+}
+
+/* カレンダーボックス
+.calendar-box {
+    background-color: #9370DB;
+    color: white;
+    padding: 30px;
+    border-radius: 8px;
+    height: 300px; 
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: 500;
+} -->
+
+/* --- フッター --- */
+footer {
+    background-color: #2c2c2c;
+    color: #aaaaaa;
+    padding: 15px 20px;
+    margin-top: 40px;
+    font-size: 0.85em;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+}
+
+.footer-link {
+    color: #aaaaaa;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+
+
+
+
+html, body {
+    height: 100%; /* 画面の高さいっぱいを使う */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* 要素を縦一列に並べる */
+    min-height: 100vh; /* 画面の高さが低い場合でも、最低限画面全体を占めるようにする */
+}
+
+/* メインコンテンツ部分のスタイル */
+main {
+    flex-grow: 1; /* メインコンテンツが利用可能なスペースを全て占有し、伸びる */
+    padding: 20px; /* 必要に応じてパディングを追加 */
+}
+
+/* フッターのスタイル */
+.app-footer {
+    flex-shrink: 0; /* フッターは縮まないように固定 */
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}

@@ -1,0 +1,25 @@
+<header class = "app-header">
+    <div class = "nav-bar">
+        <div class="logo">
+            <%= link_to "ロゴ", root_path, class: "logo-link" %>
+        </div>
+
+        <div class="nav-links">
+            <nav>
+                <%= link_to "+ 商品メモ追加", "#", class: "nav-item" %>
+                <%= link_to "タグ一覧", "#", class: "nav-item" %>
+
+                <% if user_signed_in? %>
+                    <!-- ログイン後の表示 -->
+                    <span class="user-info nav-item">
+                        ログイン中
+                    </span>
+                    <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-item" %>
+                <% else %>
+                    <!-- ログイン前の表示: Google認証へ直接リダイレクト -->
+                    <%= button_to "Googleでログイン", user_google_oauth2_omniauth_authorize_path, method: :post, class: "nav-item", data: { turbo:false } %>
+                <% end %>
+            </nav>
+        </div>
+    </div>
+</header>
