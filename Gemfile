@@ -30,11 +30,8 @@ gem 'omniauth-google-oauth2'
 # CSRF攻撃からコールバック処理を保護するためのセキュリティ対策
 gem 'omniauth-rails_csrf_protection'
 
-# ファイルストレージ 
+# ファイルストレージ
 gem 'cloudinary'
-
-# CloudinaryのAPIと連携するため
-gem 'cloudinary-storage'
 
 # 外部URLのHTMLや画像データを取得（ダウンロード）するための標準ライブラリ
 # gem 'open-uri'
