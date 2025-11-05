@@ -18,6 +18,9 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # ↓追加
+gem "metainspector"
+
+
 # ユーザー認証
 gem 'devise'
 

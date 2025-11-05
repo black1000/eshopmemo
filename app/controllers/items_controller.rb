@@ -1,3 +1,6 @@
+require "metainspector"
+require "open-uri"
+
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
@@ -33,10 +36,32 @@ class ItemsController < ApplicationController
   def create
     @item = current_user.items.build(item_params)
 
+    begin
+    # MetaInspectorを使ってURLからOGP情報を取得
+    page = MetaInspector.new(@item.url)
+
+    # タイトルが未入力ならOGPタイトルを設定
+    @item.title = page.best_title if @item.title.blank?
+
+    # 画像が未添付かつOGP画像がある場合のみ添付
+    if @item.image.blank? && page.images.best.present?
+      file = URI.open(page.images.best)
+      @item.image.attach(
+        io: file,
+        filename: "ogp_image.jpg",
+        content_type: "image/jpeg"
+      )
+    end
+
+  rescue => e
+    Rails.logger.error "OGP情報の取得に失敗しました: #{e.message}"
+    flash[:alert] = "OGP情報の取得に失敗しました。URLを確認してください。"
+  end
+
     if @item.save
       redirect_to @item, notice: "商品情報を登録しました"
     else
-      render :new, alert: "保存に失敗しました"
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -44,8 +69,7 @@ class ItemsController < ApplicationController
     @referer = request.referer
   end
 
-  def edit
-  end
+  def edit; end
 
 
   def update
@@ -121,10 +145,10 @@ private
 
 
 def item_params
-  # 来週以降のタスクで対応する予定の属性を一旦除外（:urlのみ許可）
-  params.require(:item).permit(:url)
+  params.require(:item).permit(:url, :title, :image_url, :memo, :tag_list, :image)
 end
 
+# 本リリース時に:reminder_dateを追加
 #  def item_params
 #    params.require(:item).permit(:url, :title, :image_url, :memo, :reminder_date, :tag_list, :image)
     #image を追加 - Active Storageの画像添付用
