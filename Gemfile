@@ -46,6 +46,8 @@ gem 'kaminari-i18n'
 # HTMLパーサー
 gem 'nokogiri'
 
+gem 'faraday'
+
 # カレンダー処理
 gem 'icalendar'
 

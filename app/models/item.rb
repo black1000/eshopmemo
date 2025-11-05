@@ -1,6 +1,9 @@
 class Item < ApplicationRecord
   belongs_to :user
 
-  # Itemモデルにimageという名前で画像を1枚添付できるようにする
+  # Active Storage で画像ファイルを添付
   has_one_attached :image
+
+  #タグ付け機能
+  # acts_as_taggable_on :tags
 end

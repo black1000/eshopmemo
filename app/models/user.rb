@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+has_many :items
 
   # :omniauthable に :omniauth_providers を指定してGoogleログイン対応
   devise :database_authenticatable, :registerable,
