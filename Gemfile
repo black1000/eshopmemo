@@ -18,6 +18,8 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # ↓追加
+gem "image_processing", "~> 1.2"
+
 gem "metainspector"
 
 
