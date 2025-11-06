@@ -34,9 +34,9 @@ class ItemsController < ApplicationController
 
 
   def create
-    @item = current_user.items.build(item_params)
+  @item = current_user.items.build(item_params)
 
-    begin
+  begin
     # MetaInspectorを使ってURLからOGP情報を取得
     page = MetaInspector.new(@item.url)
 
@@ -47,18 +47,22 @@ class ItemsController < ApplicationController
 
     # 画像が未添付かつOGP画像がある場合のみ添付
     if @item.image.blank? && page.images.best.present?
-      file = URI.open(page.images.best)
-      @item.image.attach(
-        io: file,
-        filename: "ogp_image.jpg",
-        content_type: "image/jpeg"
-      )
+      begin
+        file = URI.open(page.images.best)
+        @item.image.attach(
+          io: file,
+          filename: "ogp_image.jpg",
+          content_type: "image/jpeg"
+        )
+      rescue => e
+        Rails.logger.error "画像の添付に失敗しました: #{e.message}"
+      end
     end
 
-  rescue => e
-    Rails.logger.error "OGP情報の取得に失敗しました: #{e.message}"
-    flash[:alert] = "OGP情報の取得に失敗しました。URLを確認してください。"
-  end
+    rescue => e
+      Rails.logger.error "OGP情報の取得に失敗しました: #{e.message}"
+      flash[:alert] = "OGP情報の取得に失敗しました。URLを確認してください。"
+    end
 
     if @item.save
       redirect_to items_path, notice: "商品情報を登録しました"
