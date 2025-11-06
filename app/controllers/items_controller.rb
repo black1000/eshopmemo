@@ -41,7 +41,9 @@ class ItemsController < ApplicationController
     page = MetaInspector.new(@item.url)
 
     # タイトルが未入力ならOGPタイトルを設定
-    @item.title = page.best_title if @item.title.blank?
+    if @item.title.blank? && page.best_title.present?
+      @item.title = page.best_title.truncate(15, omission: "…")
+    end
 
     # 画像が未添付かつOGP画像がある場合のみ添付
     if @item.image.blank? && page.images.best.present?
@@ -59,7 +61,7 @@ class ItemsController < ApplicationController
   end
 
     if @item.save
-      redirect_to @item, notice: "商品情報を登録しました"
+      redirect_to items_path, notice: "商品情報を登録しました"
     else
       render :new, status: :unprocessable_entity
     end
@@ -145,7 +147,7 @@ private
 
 
 def item_params
-  params.require(:item).permit(:url, :title, :image_url, :memo, :tag_list, :image)
+  params.require(:item).permit(:url, :title, :image_url, :memo, :image)
 end
 
 # 本リリース時に:reminder_dateを追加

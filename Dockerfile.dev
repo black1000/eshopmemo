@@ -7,10 +7,11 @@ RUN apt-get update -qq && \
     npm install -g yarn && \
     rm -rf /var/lib/apt/lists/*
 
-COPY Gemfile ./
+COPY Gemfile* ./
+RUN bundle config set path /usr/local/bundle
 RUN bundle install
 
-COPY . /rails
+COPY . .
 RUN chmod +x bin/*
 
 EXPOSE 3000

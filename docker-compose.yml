@@ -32,6 +32,8 @@ services:
     
     volumes:
       - .:/rails:cached
+      - bundle:/usr/local/bundle
 
 volumes:
   pgdata:
+  bundle:
