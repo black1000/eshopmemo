@@ -88,31 +88,31 @@ class ItemsController < ApplicationController
   end
 
 
-  def tag
+#  def tag
     # タグで絞った商品
-    @items = current_user.items.tagged_with(params[:tag]).order(created_at: :desc).page(params[:page]).per(5)
+#    @items = current_user.items.tagged_with(params[:tag]).order(created_at: :desc).page(params[:page]).per(5)
 
     # タグ専用ページにレンダリング
-    render :tag
-  end
+#    render :tag
+#  end
 
   # タグ一覧
-  def tags
-    if current_user
-      @tags = current_user.items.tag_counts.order('count DESC').limit(10)
-    else
-      @tags = [] # 非ログインなら空配列を返す
-    end
-  end
+#  def tags
+#    if current_user
+#      @tags = current_user.items.tag_counts.order('count DESC').limit(10)
+#    else
+#      @tags = [] # 非ログインなら空配列を返す
+#    end
+ # end
 
 
-  def tag_summary
-    # 全ユーザーの商品ではなく、current_userの商品に限定
-    @tagged_items = current_user.items.tag_counts.sort_by(&:name).map do |tag|
-      [tag.name, current_user.items.tagged_with(tag.name)]
-    end.to_h
+#  def tag_summary
+#    # 全ユーザーの商品ではなく、current_userの商品に限定
+#    @tagged_items = current_user.items.tag_counts.sort_by(&:name).map do |tag|
+#      [tag.name, current_user.items.tagged_with(tag.name)]
+#    end.to_h
     # タグ集計は current_user の商品に限定
-  end
+#  end
 
 
 
