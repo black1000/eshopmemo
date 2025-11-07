@@ -1,5 +1,6 @@
 require "metainspector"
 require "open-uri"
+require "nokogiri"
 
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
@@ -34,34 +35,60 @@ class ItemsController < ApplicationController
 
 
   def create
-  @item = current_user.items.build(item_params)
+    @item = current_user.items.build(item_params)
+    downloaded_image = nil
 
-  begin
-    # MetaInspectorを使ってURLからOGP情報を取得
-    page = MetaInspector.new(@item.url)
+    begin
+      page = MetaInspector.new(@item.url, allow_redirections: :all)
 
-    # タイトルが未入力ならOGPタイトルを設定
-    if @item.title.blank? && page.best_title.present?
-      @item.title = page.best_title.truncate(15, omission: "…")
-    end
-
-    # 画像が未添付かつOGP画像がある場合のみ添付
-    if @item.image.blank? && page.images.best.present?
-      begin
-        file = URI.open(page.images.best)
-        @item.image.attach(
-          io: file,
-          filename: "ogp_image.jpg",
-          content_type: "image/jpeg"
-        )
-      rescue => e
-        Rails.logger.error "画像の添付に失敗しました: #{e.message}"
+      # タイトル設定
+      if @item.title.blank? && page.best_title.present?
+        @item.title = page.best_title.truncate(15, omission: "…")
       end
-    end
+
+      #  画像取得の多層フォールバック
+      image_url = nil
+
+      # OGP画像
+      image_url ||= page.images.best
+
+      # HTML内の最初の画像
+      if image_url.blank?
+        doc = Nokogiri::HTML(URI.open(@item.url))
+        first_img = doc.css("img").map { |img| img["src"] }.compact.first
+        if first_img.present?
+          # 相対URLを絶対URLに変換
+          image_url = URI.join(@item.url, first_img).to_s rescue nil
+        end
+      end
+
+      # faviconやブランドロゴ的代替
+      if image_url.blank?
+        favicon = doc.at("link[rel='icon']")&.[]("href") ||
+                  doc.at("link[rel='shortcut icon']")&.[]("href") ||
+                  doc.at("link[rel='apple-touch-icon']")&.[]("href")
+        if favicon.present?
+          image_url = URI.join(@item.url, favicon).to_s rescue nil
+        end
+      end
+
+      # 画像をダウンロードしてActiveStorage経由でCloudinaryへ保存
+      if image_url.present?
+        downloaded_image = URI.open(image_url)
+        @item.image.attach(
+          io: downloaded_image,
+          filename: "ogp_image_#{SecureRandom.hex(4)}.jpg",
+          content_type: downloaded_image.content_type || "image/jpeg"
+        )
+      else
+        Rails.logger.warn "画像が取得できませんでした: #{@item.url}"
+      end
 
     rescue => e
-      Rails.logger.error "OGP情報の取得に失敗しました: #{e.message}"
-      flash[:alert] = "OGP情報の取得に失敗しました。URLを確認してください。"
+      Rails.logger.error "OGPまたは画像の取得に失敗しました: #{e.message}"
+      flash[:alert] = "画像の取得に失敗しました。URLを確認してください。"
+    ensure
+      downloaded_image&.close
     end
 
     if @item.save
