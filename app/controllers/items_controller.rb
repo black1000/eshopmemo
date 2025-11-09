@@ -74,7 +74,7 @@ class ItemsController < ApplicationController
 
       # 画像をダウンロードしてActiveStorage経由でCloudinaryへ保存
       if image_url.present?
-        downloaded_image = URI.open(image_url)
+        downloaded_image = URI.open(image_url, open_timeout: 5, read_timeout: 10)
         @item.image.attach(
           io: downloaded_image,
           filename: "ogp_image_#{SecureRandom.hex(4)}.jpg",
@@ -88,7 +88,6 @@ class ItemsController < ApplicationController
       Rails.logger.error "OGPまたは画像の取得に失敗しました: #{e.message}"
       flash[:alert] = "画像の取得に失敗しました。URLを確認してください。"
     ensure
-      downloaded_image&.close
     end
 
     if @item.save
