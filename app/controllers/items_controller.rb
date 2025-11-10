@@ -20,8 +20,8 @@ class ItemsController < ApplicationController
       #@reminder_days = current_user.items
       #                             .where(reminder_date: start_date..end_date)
       #                             .group_by(&:reminder_date)
-    #else
-    #  @items = Item.none
+    else
+      @items = Item.none
     #  @reminder_days = {}
     end
 
