@@ -4,7 +4,7 @@ FROM ruby:$RUBY_VERSION-slim AS base
 WORKDIR /rails
 
 RUN apt-get update -qq && \
-    apt-get install -y libpq-dev postgresql-client nodejs npm && \
+    apt-get install -y libpq-dev postgresql-client nodejs npm bash && \
     npm install -g yarn && \
     rm -rf /var/lib/apt/lists/*
 
@@ -55,4 +55,4 @@ USER 1000:1000
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 EXPOSE 3000
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+CMD ["bash", "-c", "bundle exec rails db:migrate && bundle exec puma -C config/puma.rb"]
