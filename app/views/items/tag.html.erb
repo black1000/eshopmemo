@@ -16,7 +16,7 @@
   </h1>
 </div>
 
-
+<% unless action_name == 'tag' %>
 <% if @tags.any? %>
 <% @tags.each do |tag| %>
   <%= link_to tag.name, tag_items_path(tag.id),
@@ -24,6 +24,7 @@
     <% end %>
   <% else %>
    <p>タグが登録されていません。</p>
+<% end %>
 <% end %>
 
 <div class="flex flex-col lg:flex-row items-start gap-6 mt-6">
