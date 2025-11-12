@@ -5,6 +5,6 @@ class Item < ApplicationRecord
   # Active Storage で画像ファイルを添付
   has_one_attached :image
 
-  #タグ付け機能
+  #タグ付け機能(複数タグ対応)
   # acts_as_taggable_on :tags
 end

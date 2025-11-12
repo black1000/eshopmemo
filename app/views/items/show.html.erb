@@ -32,6 +32,17 @@
       <strong>メモ：</strong>
       <%= @item.memo.presence || "メモは登録されていません。" %>
     </p>
+    
+    <!-- タグ -->
+    <p>
+      タグ：
+      <% if @item.tag.present? %>
+        <%= link_to @item.tag.name, tag_items_path(@item.tag.id),
+          class: "inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded mb-1" %>
+      <% else %>
+        タグなし
+      <% end %>
+    </p>
 
 
   <!-- 削除ボタン -->

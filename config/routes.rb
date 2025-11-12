@@ -5,10 +5,11 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
+  get 'tag/:id', to: 'items#tag', as: :tag_items
+
   # 商品関連のルーティング
   resources :items do
     collection do
-      get 'tag/:tag', to: 'items#tag', as: :tagged_items 
       get :reminders 
       get :memos_on_date
     end

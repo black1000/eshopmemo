@@ -37,6 +37,12 @@ class ItemsController < ApplicationController
   def create
     @item = current_user.items.build(item_params)
     downloaded_image = nil
+ 
+    # 新規タグ作成
+    if params[:item][:new_tag].present?
+      new_tag = current_user.tags.find_or_create_by(name: params[:item][:new_tag])
+      @item.tag = new_tag
+    end
 
     begin
       page = MetaInspector.new(@item.url, allow_redirections: :all)
@@ -118,22 +124,29 @@ class ItemsController < ApplicationController
   end
 
 
-#  def tag
-    # タグで絞った商品
-#    @items = current_user.items.tagged_with(params[:tag]).order(created_at: :desc).page(params[:page]).per(5)
+  def tag
+    @tag = current_user.tags.find(params[:id])
 
-    # タグ専用ページにレンダリング
-#    render :tag
-#  end
+    # 該当タグの商品を取得
+    @items = current_user.items
+                         .where(tag_id: @tag.id)
+                         .order(created_at: :desc)
+                         .page(params[:page])
+                         .per(5)
+
+    @tags = current_user.tags.distinct.order(:name)
+
+    render :tag
+  end
 
   # タグ一覧
-#  def tags
-#    if current_user
-#      @tags = current_user.items.tag_counts.order('count DESC').limit(10)
-#    else
-#      @tags = [] # 非ログインなら空配列を返す
-#    end
- # end
+  def tags
+    if current_user
+      @tags = current_user.tags.order(:name)
+    else
+      @tags = [] # 非ログインなら空配列を返す
+    end
+  end
 
 
 #  def tag_summary
@@ -177,7 +190,7 @@ private
 
 
 def item_params
-  params.require(:item).permit(:url, :title, :image_url, :memo, :image)
+  params.require(:item).permit(:url, :title, :image_url, :memo, :image, :tag_id)
 end
 
 # 本リリース時に:reminder_dateを追加
