@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   belongs_to :tag, optional: true
 
   # Active Storage で画像ファイルを添付
-  has_one_attached :image
+  has_one_attached :image, dependent: :purge_later
 
   #タグ付け機能(複数タグ対応)
   # acts_as_taggable_on :tags

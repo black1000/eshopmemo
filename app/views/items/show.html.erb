@@ -52,8 +52,7 @@
   <div class="mt-6">
     <%= link_to "削除",
         item_path(@item),
-        method: :delete,
-        data: { confirm: "本当に削除しますか？" },
+        data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
         class: "px-5 py-2 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 text-base sm:text-lg" %>
   </div>
 </div>
