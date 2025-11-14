@@ -26,6 +26,12 @@ class ItemsController < ApplicationController
     end
 
     @items = @items.page(params[:page]).per(5)
+
+    @tags = current_user.tags
+                    .left_joins(:items)
+                    .group('tags.id')
+                    .having('COUNT(items.id) > 0')
+                    .order(:name)
   end
 
 
@@ -120,7 +126,14 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    tag = @item.tag
+
     @item.destroy
+
+    if tag.present? && tag.items.empty?
+      tag.destroy
+    end
+
     redirect_to items_path, notice: "商品を削除しました"
   end
 
@@ -135,7 +148,12 @@ class ItemsController < ApplicationController
                          .page(params[:page])
                          .per(5)
 
-    @tags = current_user.tags.distinct.order(:name)
+    # 商品が1件以上あるタグのみ表示
+    @tags = current_user.tags
+                        .left_joins(:items)
+                        .group('tags.id')
+                        .having('COUNT(items.id) > 0')
+                        .order(:name)
 
     render :tag
   end
@@ -143,7 +161,11 @@ class ItemsController < ApplicationController
   # タグ一覧
   def tags
     if current_user
-      @tags = current_user.tags.order(:name)
+      @tags = current_user.tags
+                          .left_joins(:items)
+                          .group('tags.id')
+                          .having('COUNT(items.id) > 0')
+                          .order(:name)
     else
       @tags = [] # 非ログインなら空配列を返す
     end
