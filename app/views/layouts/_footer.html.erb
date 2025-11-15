@@ -1,8 +1,12 @@
 <footer class="app-footer">
-  <div class="footer-content">
+  <div class="footer-top">
     <span>©<%= Time.current.year %> eShopMemo</span>
-    <%= link_to "利用規約", "#", class: "footer-link" %>
-    <%= link_to "プライバシーポリシー", "#", class: "footer-link" %>
-    <%= link_to "お問い合わせ", "#", class: "footer-link" %>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-link text-gray-400 cursor-not-allowed">利用規約（準備中）</span>
+    <%= link_to "プライバシーポリシー", "https://kiyac.app/privacypolicy/vhjMjRP3YV4GePMMSU7v", 
+                class: "footer-link", target: "_blank", rel: "noopener" %>
+    <%= link_to "お問い合わせ", "https://forms.gle/icNJ3JjUTEaXdYV2A", 
+                class: "footer-link", target: "_blank", rel: "noopener" %>
   </div>
 </footer>

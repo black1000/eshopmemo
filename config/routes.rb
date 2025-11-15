@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "pages/terms", to: "pages#terms", as: "terms"
+  get "pages/privacy", to: "pages#privacy", as: "privacy"
+  get "pages/contact", to:"pages#contact", as: "contact"
 
     # Deviseのルーティングに、OmniAuthのコールバックコントローラを指定する設定を追加
   devise_for :users, controllers: {
