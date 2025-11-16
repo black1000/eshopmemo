@@ -6,7 +6,10 @@
       気になる商品を、迷わず・かんたんに記録する。<br>
       URLを貼るだけで商品情報を自動で取得します。
     </p>
-
+    
+    <%= button_to "Googleでログイン", user_google_oauth2_omniauth_authorize_path,
+        method: :post, class: "nav-item", data: { turbo: false },
+        class: "px-8 py-3 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition" %> 
 
   </section>
 

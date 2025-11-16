@@ -43,12 +43,17 @@ class ItemsController < ApplicationController
   def create
     @item = current_user.items.build(item_params)
     downloaded_image = nil
- 
-    # 新規タグ作成
+
+      # 新規タグ作成
     if params[:item][:new_tag].present?
       new_tag = current_user.tags.find_or_create_by(name: params[:item][:new_tag])
       @item.tag = new_tag
     end
+
+    if params[:new_tag_name].present?
+  tag = current_user.tags.find_or_create_by(name: params[:new_tag_name])
+  @item.tag = tag
+end
 
     begin
       page = MetaInspector.new(@item.url, allow_redirections: :all)
@@ -117,13 +122,20 @@ class ItemsController < ApplicationController
 
 
   def update
-    if @item.update(item_params)
-      redirect_to @item, notice: "商品情報を更新しました"
-    else
-      flash.now[:alert] = "更新に失敗しました"
-      render :edit, status: :unprocessable_entity
+  @item = current_user.items.find(params[:id])
+
+  if @item.update(item_params)
+    if params[:new_tag_name].present?
+      tag = current_user.tags.find_or_create_by(name: params[:new_tag_name])
+      @item.update(tag: tag)
     end
+
+    redirect_to @item, notice: "商品情報を更新しました"
+  else
+    flash.now[:alert] = "更新に失敗しました"
+    render :edit, status: :unprocessable_entity
   end
+end
 
   def destroy
     tag = @item.tag

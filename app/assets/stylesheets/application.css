@@ -200,3 +200,36 @@ main {
     cursor: not-allowed;
     color: #aaaaaa;
 }
+
+.hamburger {
+  cursor: pointer;
+  font-size: 26px;
+  padding: 10px;
+  color:#D4AF37;
+}
+
+.hamburger-menu {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  background: #333;
+  padding: 15px;
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+.hamburger-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hamburger-menu li {
+  margin: 10px 0;
+}
+
+.hamburger-menu a {
+  color: white;
+  text-decoration: none;
+}

@@ -1,6 +1,21 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+
+  def destroy
+    resource.destroy
+    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+
+    flash[:notice] = "アカウントを削除しました。ご利用ありがとうございました。"
+
+    redirect_to root_path
+  end
+
+    protected
+
+  def after_sign_out_path_for(resource_or_scope)
+    root_path
+  end
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 

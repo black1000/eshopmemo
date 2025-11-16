@@ -1,27 +1,42 @@
-<header class = "app-header">
-    <div class = "nav-bar">
-        <div class="logo">
-            <%= link_to "eShopMemo", root_path, class: "logo-link" %>
-        </div>
+<header class="app-header">
+  <div class="nav-bar">
+
+    <!-- ロゴ -->
+    <div class="logo">
+      <%= link_to "eShopMemo", root_path, class: "logo-link" %>
+    </div>
 
     <% if user_signed_in? %>
-        <div class="nav-links">
-            <nav>
-                <%= link_to "+ 商品メモ追加", new_item_path, class: "nav-item" %>
-                <%= link_to "タグ一覧", tags_path, class: "nav-item" %>
+      <!-- 左に表示されるメニュー -->
+      <div class="nav-links">
+        <%= link_to "+ 商品メモ追加", new_item_path, class: "nav-item" %>
+        <%= link_to "タグ一覧", tags_path, class: "nav-item" %>
 
-                    <!-- ログイン後の表示 -->
-                    <span class="user-info nav-item">
-                        ログイン中
-                    </span>
-                    <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-item" %>
-                <% else %>
-                <!-- ログイン前の表示: Google認証へ直接リダイレクト -->
-                <div class="nav-link">
-                <nav>
-                    <%= button_to "Googleでログイン", user_google_oauth2_omniauth_authorize_path, method: :post, class: "nav-item", data: { turbo:false } %>
-                </nav>
-            </div>
-        <% end %>
+        <span class="user-info nav-item">ログイン中</span>
+      </div>
+    <% end %>
+
+    <!-- ハンバーガー -->
+    <div class="hamburger" id="hamburger">
+      ☰
     </div>
+
+  </div>
+
+  <!-- ハンバーガーメニュー内容 -->
+  <div class="hamburger-menu" id="hamburger-menu">
+    <ul>
+      <li><%= link_to "使い方", tutorial_path %></li>
+
+      <% if user_signed_in? %>
+        <li><%= link_to "アカウント削除", user_registration_path,
+              data: { turbo_confirm: "本当に削除しますか？", turbo_method: :delete } %></li>
+        <li><%= link_to "ログアウト", destroy_user_session_path,
+              data: { turbo_method: :delete } %></li>
+      <% else %>
+        <li><%= button_to "Googleでログイン", user_google_oauth2_omniauth_authorize_path,
+              method: :post, class: "nav-item", data: { turbo: false } %></li>
+      <% end %>
+    </ul>
+  </div>
 </header>
