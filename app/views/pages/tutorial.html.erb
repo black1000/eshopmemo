@@ -81,8 +81,15 @@
       商品データ・タグなど、登録した情報はすべて削除されます。
     </p>
   </section>
+  <% if user_signed_in? %>
 <div class="mt-12 text-center">
-  <%= link_to "商品一覧に戻る", items_path,
-        class: "inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-lg shadow" %>
-</div>
+    <%= link_to "商品一覧に戻る", items_path,
+          class: "inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-lg shadow" %>
+  </div>
+<% else %>
+  <div class="mt-12 text-center">
+    <%= link_to "トップページに戻る", root_path,
+          class: "inline-block bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg shadow" %>
+  </div>
+<% end %>
 </div>
