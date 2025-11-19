@@ -53,6 +53,12 @@
         <%= f.text_field :new_tag, placeholder: "新しいタグ名を入力", class: "w-full border rounded px-2 py-1" %>
       </div>
 
+      <div class="mb-4">
+        <%= f.label :scheduled_date, "リマインダー日", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.date_field :scheduled_date,
+        class:  "border-2 border-yellow-300 rounded-mb px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 w-full" %>
+      </div>
+
       <!-- ボタン -->
       <div class="flex items-center gap-4">
         <%= f.submit "追加する",

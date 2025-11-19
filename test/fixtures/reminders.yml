@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  item: one
+  scheduled_date: 2025-11-17
+  memo: MyText
+
+two:
+  user: two
+  item: two
+  scheduled_date: 2025-11-17
+  memo: MyText

@@ -1,0 +1,35 @@
+<div class="mt-10">
+    <%= link_to "← 商品メモ一覧に戻る", items_path,
+        class: "px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600" %>
+</div>
+
+<div class="p-4 max-w-2xl mx-auto">
+  <h2 class="text-2xl font-bold mb-4">
+    <%= @date.strftime("%Y年%m月%d日のリマインダー") %>
+  </h2>
+
+  <% if @reminders.any? %>
+    <div class="space-y-3">
+      <% @reminders.each do |reminder| %>
+        <%= link_to item_path(reminder.item),
+            class: "flex items-center p-3 bg-white shadow rounded hover:bg-gray-50" do %>
+
+          <% if reminder.item.image.present? %>
+            <%= image_tag reminder.item.image, class: "w-12 h-12 object-cover rounded mr-3" %>
+          <% else %>
+            <div class="w-12 h-12 bg-gray-300 rounded mr-3 flex items-center justify-center text-gray-700 text-xs">
+              No Image
+            </div>
+          <% end %>
+
+          <div>
+            <p class="font-semibold"><%= reminder.item.title %></p>
+            <p class="text-sm text-gray-600 mt-1 break-all whitespace-normal">メモ: <%= reminder.item.memo.presence || "なし" %></p>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-500">この日に登録されたリマインダーはありません。</p>
+  <% end %>
+</div>

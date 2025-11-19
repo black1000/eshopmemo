@@ -12,20 +12,22 @@ class ItemsController < ApplicationController
       # ログインユーザーの商品のみを表示
       @items = current_user.items.order(created_at: :desc)
 
-      # カレンダー用：今月のリマインダー日を取得 仮
-      #today = Date.current
-      #start_date = today.beginning_of_month
-      #end_date = today.end_of_month
+      # カレンダー用
+      today = Date.current
+      start_date = today.beginning_of_month
+      end_date = today.end_of_month
 
-      #@reminder_days = current_user.items
-      #                             .where(reminder_date: start_date..end_date)
-      #                             .group_by(&:reminder_date)
+      reminders = current_user.reminders
+                              .where(scheduled_date: start_date..end_date)
+                              .includes(:item)
+
+      @reminder_days = reminders.group_by(&:scheduled_date)
     else
       @items = Item.none
-    #  @reminder_days = {}
+      @reminder_days = {}
     end
 
-    @items = @items.page(params[:page]).per(5)
+    @items = @items.page(params[:page]).per(10)
 
     @tags = current_user.tags
                     .left_joins(:items)
@@ -108,27 +110,40 @@ end
     end
 
     if @item.save
-      redirect_to items_path, notice: "商品情報を登録しました"
-    else
-      render :new, status: :unprocessable_entity
-    end
+  # リマインダー日付が入力されていた場合のみ保存
+  if params[:item][:scheduled_date].present?
+    current_user.reminders.create!(
+      item: @item,
+      scheduled_date: params[:item][:scheduled_date],
+      memo: params[:item][:reminder_memo]
+    )
+  end
+
+  redirect_to items_path, notice: "商品情報を登録しました"
+else
+  render :new
+end
   end
 
   def show
-    @referer = request.referer
-  end
+  @item = current_user.items.find(params[:id])
+  
+  @reminder = @item.reminder
+end
 
-  def edit; end
+
+  def edit
+   @item.build_reminder if @item.reminder.blank?
+  end
 
 
   def update
-  @item = current_user.items.find(params[:id])
+  update_params = item_params 
 
-  if @item.update(item_params)
-    if params[:new_tag_name].present?
-      tag = current_user.tags.find_or_create_by(name: params[:new_tag_name])
-      @item.update(tag: tag)
-    end
+  if @item.update(update_params) 
+
+    @item.reload
+    @item.reminder&.reload 
 
     redirect_to @item, notice: "商品情報を更新しました"
   else
@@ -158,7 +173,7 @@ end
                          .where(tag_id: @tag.id)
                          .order(created_at: :desc)
                          .page(params[:page])
-                         .per(5)
+                         .per(10)
 
     # 商品が1件以上あるタグのみ表示
     @tags = current_user.tags
@@ -181,57 +196,72 @@ end
     else
       @tags = [] # 非ログインなら空配列を返す
     end
+    
   end
 
 
-#  def tag_summary
-#    # 全ユーザーの商品ではなく、current_userの商品に限定
-#    @tagged_items = current_user.items.tag_counts.sort_by(&:name).map do |tag|
-#      [tag.name, current_user.items.tagged_with(tag.name)]
-#    end.to_h
-    # タグ集計は current_user の商品に限定
-#  end
+def reminder_params
+  params.require(:reminder).permit(:scheduled_date, :memo)
+end
+
+def create_reminder
+  @item = current_user.items.find(params[:id])
+  @reminder = current_user.reminders.build(reminder_params.merge(item: @item))
+
+  if @reminder.save
+    redirect_to @item, notice: "リマインダーを追加しました"
+  else
+    flash[:alert] = "リマインダーの登録に失敗しました"
+    redirect_to @item
+  end
+end
+
+def reminders
+  @reminders = current_user.reminders
+                           .includes(:item)
+                           .order(scheduled_date: :asc)
+                           .page(params[:page]).per(10)
+
+  @reminder_days = @reminders.group_by(&:scheduled_date)
+end
 
 
 
-  # Item#reminders (リマインダー一覧)仮
-#  def reminders
-#    @reminder_items = current_user.items
-#                                 .where.not(reminder_date: nil)
-#                                 .order(reminder_date: :asc)
-#                                 .page(params[:page])
-#                                 .per(6)
-#  end
-
-  # Item#memos_on_date (特定日のメモ/カレンダー詳細)仮
-#  def memos_on_date
-#    date = Date.parse(params[:date])
-#    @items = current_user.items.where(reminder_date: date)
-
-#    respond_to do |format|
-#      format.json { render json: @items }
-#    end
-#  end
-
+def reminders_by_date
+  date = Date.parse(params[:date])
+  @reminders = current_user.reminders
+                           .includes(:item)
+                           .where(scheduled_date: date)
+                           .page(params[:page]).per(6)
+  @date = date
+end
 
 
 private
 
-  # current_userに関連付いた商品のみを検索
+
   def set_item
     @item = current_user.items.find(params[:id])
   end
 
 
+def item_params # item に必要なカラムだけを許可して取得
+  whitelisted = params.require(:item).permit(
+    :url, :title, :image_url, :memo, :image, :tag_id,
+    reminder_attributes: [:id, :scheduled_date, :memo, :_destroy, :user_id] 
+  )
 
-def item_params
-  params.require(:item).permit(:url, :title, :image_url, :memo, :image, :tag_id)
+  if whitelisted[:reminder_attributes].present?
+    reminder_attrs = whitelisted[:reminder_attributes]
+
+    # Reminderが新規作成時（idが空）、または user_idが設定されていない場合
+    if reminder_attrs[:id].blank? || reminder_attrs[:user_id].blank?
+       # user_idをcurrent_user.idで上書き
+       whitelisted[:reminder_attributes] = reminder_attrs.merge(user_id: current_user.id)
+    end
+  end
+
+  whitelisted #最終的な permit 済みパラメータを返す
 end
-
-# 本リリース時に:reminder_dateを追加
-#  def item_params
-#    params.require(:item).permit(:url, :title, :image_url, :memo, :reminder_date, :tag_list, :image)
-    #image を追加 - Active Storageの画像添付用
-#  end
 
 end

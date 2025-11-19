@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "pages/privacy", to: "pages#privacy", as: "privacy"
   get "pages/contact", to:"pages#contact", as: "contact"
   get "tutorial", to: "pages#tutorial"
+  get "items/reminders_by_date/:date", to: "items#reminders_by_date", as: "reminders_by_date"
 
     # Deviseのルーティングに、OmniAuthのコールバックコントローラを指定する設定を追加
   devise_for :users, controllers: {
@@ -15,9 +16,15 @@ Rails.application.routes.draw do
   # 商品関連のルーティング
   resources :items do
     collection do
-      get :reminders 
-      get :memos_on_date
+      get :reminders   
+      get :memos_on_date  
+      get :edit_multiple   # 複数商品の編集フォーム表示
+      patch :update_multiple  # 複数商品の更新処理
     end
+
+     member do
+    post :create_reminder # 単一商品のリマインダー作成
+  end
   end
 
   get 'tags', to: 'items#tags', as: :tags

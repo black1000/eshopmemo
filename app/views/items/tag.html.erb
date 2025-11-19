@@ -3,7 +3,7 @@
     <%= link_to "詳細へ戻る", :back, class: "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50" %>
   <% end %>
 
-  <%= link_to "商品一覧へ戻る", items_path, class: "inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700" %>
+  <%= link_to "← 商品一覧へ戻る", items_path, class: "inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700" %>
 </div>
 
 <div class="flex items-center justify-between mb-6">
@@ -51,9 +51,13 @@
                 <%= link_to (item.try(:title).presence || "タイトルなし"), (item.url.presence || "#"), target: "_blank" %>
               </h2>
 
-              <p class="text-sm text-gray-600 mt-1">
+              <p class="text-sm text-gray-600 mt-1 break-all whitespace-normal">
                 メモ：<%= item.try(:memo).presence || "メモなし" %>
               </p>
+
+              <p class="text-sm text-gray-600 mt-1">
+                  📅 <%= item.reminder&.scheduled_date&.strftime("%Y-%m-%d") || "日付なし" %>
+                </p>
 
               <div class="mt-2">
                 <%= link_to "詳細を見る", item_path(item),

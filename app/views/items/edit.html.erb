@@ -82,6 +82,17 @@
   </p>
 </div>
 
+<%= f.fields_for :reminder do |r| %>
+  <%= r.hidden_field :id %>
+
+  <div class="mb-4">
+    <%= r.label :scheduled_date, "リマインダー日" %>
+    <%= r.date_field :scheduled_date,
+    class: "border-2 border-yellow-300 rounded-mb px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 w-full" %>
+  </div>
+
+<% end %>
+
       <div class="flex justify-between items-center pt-4">
         <%= link_to "← 商品メモ一覧に戻る", items_path,
           class: "px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600" %>
