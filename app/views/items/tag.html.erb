@@ -17,59 +17,61 @@
 </div>
 
 <% unless action_name == 'tag' %>
-<% if @tags.any? %>
-<% @tags.each do |tag| %>
-  <%= link_to tag.name, tag_items_path(tag.id),
-        class: "inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded mb-1" %>
+  <% if @tags.any? %>
+    <% @tags.each do |tag| %>
+      <%= link_to tag.name, tag_items_path(tag.id),
+            class: "inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded mb-1" %>
     <% end %>
   <% else %>
-   <p>タグが登録されていません。</p>
-<% end %>
+    <p>タグが登録されていません。</p>
+  <% end %>
 <% end %>
 
-<div class="flex flex-col lg:flex-row items-start gap-6 mt-6">
-  <div class="w-full lg:w-3/4">
-    <% if @items.present? %>
+<!-- 商品一覧 -->
+<div class="mt-6">
+  <% if @items.present? %>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
       <% @items.each do |item| %>
-        <div class="mb-4 rounded-xl border border-gray-200 bg-white p-4 shadow hover:shadow-md transition">
-          <div class="flex flex-col lg:flex-row items-center lg:items-start gap-4">
+        <div class="rounded-xl border border-gray-200 bg-white p-4 shadow hover:shadow-md transition">
 
-            <!-- 商品画像 -->
-            <%= link_to (item.url.presence || "#"), target: "_blank", class: "w-full lg:w-1/4" do %>
-              <% if item.image.attached? %>
-                <%= image_tag url_for(item.image),
-                    class: "rounded-lg w-full h-48 object-cover lg:h-32" %>
-              <% else %>
-                <%= image_tag "no_image.png",
-                    class: "rounded-lg w-full h-48 object-cover lg:h-32 opacity-60" %>
-              <% end %>
-            <% end %>
+          <!-- 画像（縦レイアウト） -->
+          <% if item.image.attached? %>
+            <%= image_tag url_for(item.image), class: "rounded-lg w-full h-40 object-cover mb-3" %>
+          <% else %>
+            <%= image_tag "no_image.png", class: "rounded-lg w-full h-40 object-cover opacity-60 mb-3" %>
+          <% end %>
 
-            <!-- 商品情報 -->
-            <div class="flex-1 text-center lg:text-left">
-              <h2 class="text-lg font-semibold text-blue-700 hover:underline break-words">
-                <%= link_to (item.try(:title).presence || "タイトルなし"), (item.url.presence || "#"), target: "_blank" %>
-              </h2>
+          <!-- タイトル -->
+          <h2 class="text-lg font-semibold text-blue-700 hover:underline break-words">
+            <%= link_to (item.title || "タイトルなし"), (item.url || "#"), target: "_blank" %>
+          </h2>
 
-              <p class="text-sm text-gray-600 mt-1 break-all whitespace-normal">
-                メモ：<%= item.try(:memo).presence || "メモなし" %>
-              </p>
+          <!-- メモ -->
+          <p class="text-sm text-gray-600 mt-1 break-all whitespace-normal">
+            メモ：<%= item.memo.presence || "メモなし" %>
+          </p>
 
-              <p class="text-sm text-gray-600 mt-1">
-                  📅 <%= item.reminder&.scheduled_date&.strftime("%Y-%m-%d") || "日付なし" %>
-                </p>
+          <!-- 日付 -->
+          <p class="text-sm text-gray-600 mt-1">
+            📅 <%= item.reminder&.scheduled_date&.strftime("%Y-%m-%d") || "日付なし" %>
+          </p>
 
-              <div class="mt-2">
-                <%= link_to "詳細を見る", item_path(item),
-                    class: "text-sm text-gray-500 hover:text-gray-700 underline" %>
-              </div>
-            </div>
-          </div>
+          <!-- 詳細 -->
+          <%= link_to "詳細を見る", item_path(item), class: "text-sm text-gray-500 hover:text-gray-700 underline mt-2 inline-block" %>
+
         </div>
       <% end %>
+
+    </div>
+
+    <!-- ページネーション -->
+    <div class="mt-6">
       <%= paginate @items %>
-    <% else %>
-      <p class="text-gray-600 text-center mt-8">まだ商品が登録されていません。</p>
-    <% end %>
-  </div>
+    </div>
+
+  <% else %>
+    <p class="text-gray-600 text-center mt-8 col-span-3">まだ商品が登録されていません。</p>
+  <% end %>
 </div>

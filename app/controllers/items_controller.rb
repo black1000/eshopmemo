@@ -27,7 +27,7 @@ class ItemsController < ApplicationController
       @reminder_days = {}
     end
 
-    @items = @items.page(params[:page]).per(10)
+    @items = @items.page(params[:page]).per(8)
 
     @tags = current_user.tags
                     .left_joins(:items)
@@ -173,7 +173,7 @@ end
                          .where(tag_id: @tag.id)
                          .order(created_at: :desc)
                          .page(params[:page])
-                         .per(10)
+                         .per(6)
 
     # 商品が1件以上あるタグのみ表示
     @tags = current_user.tags
@@ -220,7 +220,7 @@ def reminders
   @reminders = current_user.reminders
                            .includes(:item)
                            .order(scheduled_date: :asc)
-                           .page(params[:page]).per(10)
+                           .page(params[:page]).per(8)
 
   @reminder_days = @reminders.group_by(&:scheduled_date)
 end

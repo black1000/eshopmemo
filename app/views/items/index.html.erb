@@ -67,8 +67,8 @@
   </div>
 
   <!-- カレンダー-->
-  <div class="rounded-xl bg-purple-200 p-4 min-h-[400px] shadow-md">
-  <h2 class="text-xl font-bold text-purple-900 mb-4">カレンダー</h2>
+  <div class="lg:col-span-1 flex flex-col gap-4 sticky top-4 h-fit">
+  <h2 class="text-2xl font-bold text-gray-800">カレンダー</h2>
 
   <% today = Date.current %>
   <% first_day = today.beginning_of_month %>
@@ -126,6 +126,15 @@
       <% end %>
     </tbody>
   </table>
+
+  <!-- 楽天アフィリエイト広告 -->
+  <div class="mt-4 flex justify-center">
+  <a href="https://hb.afl.rakuten.co.jp/hsc/4e5f3a8c.91f90091.4e5e0f94.70024a82/?link_type=pict&ut=eyJwYWdlIjoic2hvcCIsInR5cGUiOiJwaWN0IiwiY29sIjoxLCJjYXQiOiIxMTMiLCJiYW4iOjEyNTE4MjAsImFtcCI6ZmFsc2V9" target="_blank" rel="nofollow sponsored noopener" style="word-wrap:break-word;"><img src="https://hbb.afl.rakuten.co.jp/hsb/4e5f3a8c.91f90091.4e5e0f94.70024a82/?me_id=1&me_adv_id=1251820&t=pict" border="0" style="margin:2px" alt="" title=""></a>
+</div>
+
+  <div class="mt-4 flex justify-center">
+    <script type="text/javascript">rakuten_design="slide";rakuten_affiliateId="4e5ecbdf.9c1d6718.4e5ecbe1.fe7b9649";rakuten_items="ctsmatch";rakuten_genreId="0";rakuten_size="336x280";rakuten_target="_blank";rakuten_theme="gray";rakuten_border="on";rakuten_auto_mode="on";rakuten_genre_title="off";rakuten_recommend="on";rakuten_ts="1763637497254";</script><script type="text/javascript" src="https://xml.affiliate.rakuten.co.jp/widget/js/rakuten_widget.js?20230106"></script>
+  </div>
 </div>
 
 <script>

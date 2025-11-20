@@ -3,6 +3,10 @@ class Item < ApplicationRecord
   belongs_to :tag, optional: true
   attr_accessor :tag_name
 
+  validates :memo, length: {maximum: 30}, allow_blank: true
+  
+  
+
   has_one :reminder, dependent: :destroy
   accepts_nested_attributes_for :reminder, allow_destroy: true
 
