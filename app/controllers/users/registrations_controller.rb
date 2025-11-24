@@ -6,8 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.destroy
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
 
-    flash[:notice] = "アカウントを削除しました。ご利用ありがとうございました。"
-
+    flash[:notice] = t('devise.registrations.destroyed')
     redirect_to root_path
   end
 

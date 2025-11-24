@@ -28,4 +28,269 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  top:
+    index:
+      title: "eShopMemo"
+      catch_copy: "Quickly and easily save products you are interested in."
+      catch_sub: "Just paste a URL and automatically fetch product details."
+      login_google: "Login with Google"
+
+      overview_title: "Service Overview"
+      overview_text: "eShopMemo is a 'shopping organizer app' that allows you to save products from online stores simply by pasting the URL."
+      overview_text2: "It automatically fetches product titles and images, so you can review them later calmly."
+
+      recommend_title: "Recommended for"
+      recommend:
+        1: "People who want to organize products from online stores in a list"
+        2: "People who want to save privately without sharing on social media"
+        3: "People who want to avoid impulse buying and think carefully before purchasing"
+
+      usage_title: "How to Use"
+      steps:
+        - "Paste the URL"
+        - "Automatically fetch product information"
+        - "Add notes and tags"
+        - "Review in a list"
+
+      strength_title: "Strengths of eShopMemo"
+      strengths:
+        1: "Manage products from multiple e-commerce sites in one place"
+        2: "Automatically fetch product information (image/title) just by URL"
+        3: "Fully private design, not intended for public sharing"
+        4: "Can be used as a 'shopping notebook' for thoughtful decisions"
+
+      background_title: "Background"
+      background_text: "Products you are interested in get lost across multiple storage locations..."
+      background_text2: "Based on this inconvenience, I developed a service to make recording products easier."
+
+  items:
+    index:
+      title: "Memo List"
+      plan_list: "Scheduled List"
+      no_items: "No products registered yet."
+      calendar: "Calendar"
+      weekdays:
+        - "Sun"
+        - "Mon"
+        - "Tue"
+        - "Wed"
+        - "Thu"
+        - "Fri"
+        - "Sat"
+
+    show:
+      no_title: "No title"
+      memo: "Memo"
+      no_memo: "No memo"
+      no_date: "No date"
+      details: "View details"
+      title: "Detail Page"
+      back_memo: "Back to memo list"
+      edit: "Edit"
+      item_title: "Product Name"
+      item_text: "No URL registered"
+      tag: "Tag"
+      no_tag: "No tag"
+      reminder: "Scheduled Date"
+      no_reminder: "No date"
+      delete: "Delete"
+      delete_text: "Are you sure you want to delete?"
+
+    new:
+      title: "Add Memo"
+      submit: "Add"
+      item_url: "Product URL"
+      url_text: "Enter the product page URL"
+      item_title: "Title"
+      item_text: "Enter the product title"
+      image: "Product Image"
+      image_text: "If there is no image, the OGP image will be set automatically."
+      memo: "Memo"
+      memo_text: "Memo (up to 30 characters)"
+      tag: "Select existing tag"
+      no_tag: "No tag"
+      new_tag: "Create new tag"
+      new_tag_text: "Enter new tag name"
+      reminder: "Scheduled Date"
+      back_memo: "Back"
+      select_file_button: "Select file"
+      file_not_selected_placeholder: "Please select a file"
+
+    edit:
+      title: "Edit Memo"
+      submit: "Update"
+      image: "📷 Select Image"
+      item_title: "Product Name"
+      clear: "Clear"
+      url_change: "If the link is invalid, enter a new URL"
+      memo: "Memo (up to 30 characters)"
+      tag: "Tag"
+      no_tag: "No tag"
+      new_tag: "Create new tag (optional)"
+      new_tag_title: "Enter new tag name"
+      tag_text: "If entered, the tag selection above will be ignored, and a new tag will be created automatically."
+      reminder: "Scheduled Date"
+      back_memo: "Back to memo list"
+
+    reminders:
+      back_memo: "Back to memo list"
+      year_and_month: "Scheduled for %Y/%m/%d"
+      memo: "Memo"
+      no_memo: "None"
+      reminder_text: "No schedules registered for this day."
+
+    reminder:
+      title: "Scheduled List"
+      back_memo: "Back to memo list"
+      no_item: "No product"
+      no_title: "No title"
+      no_date: "No date"
+      memo: "Memo"
+      no_memo: "No memo"
+      detail: "View details"
+
+    tag:
+      back_detail: "Back to details"
+      back_memo: "Back to memo list"
+      tag_name_text: " memos"
+      tag_search: "Search tags"
+      text: "No tags registered."
+      no_title: "No title"
+      memo: "Memo"
+      no_memo: "No memo"
+      no_date: "No date"
+      detail: "View details"
+      no_item: "No products registered yet."
+
+    tags:
+      title: "Tag List"
+      text: "No tags registered."
+
+    create:
+      success: "Product information registered successfully"
+      image_fetch_failed: "Failed to fetch image. Please check the URL."
+      image_not_found_log: "Image could not be fetched: %{url}"
+      image_fetch_failed_log: "Failed to fetch OGP or image: %{message}"
+
+    update:
+      success: "Product information updated successfully"
+      fail: "Failed to update"
+
+    destroy:
+      success: "Product deleted successfully"
+
+  layouts:
+    footer:
+      terms_text: "Terms of Service (Coming Soon)"
+      privacy: "Privacy Policy"
+      contact: "Contact"
+
+    header:
+      new_item: "+ Add Product Memo"
+      tag_list: "Tag List"
+      login: "Logged in"
+      tutorial: "How to use"
+      account_delete: "Delete Account"
+      delete_text: "Are you sure you want to delete?"
+      logout: "Logout"
+      google_login: "Login with Google"
+
+  pages:
+    tutorial:
+      title: "User Guide"
+      subtitle: "Basic operations of eShopMemo"
+
+      login:
+        title: "Login with Google"
+        text1: "Easily log in with your Google account."
+        text2: "No need to create a password. Secure and simple."
+
+      memo:
+        title: "Record a Product"
+        text1: "Enter the URL of a product, and its name and image will be fetched automatically."
+        text2: "You can freely add a reason for wanting it or other notes."
+        notice_html: "※ On Amazon or some official brand sites, images may not be fetched automatically due to <strong class='font-semibold'>security settings</strong>.<br>In that case, you can manually add an image from the <span class='font-semibold text-yellow-600'>product edit page</span>."
+
+      tags:
+        title: "How to Use and Manage Tags"
+        text1: "Attach tags to products to categorize by genre."
+        text2: "You can create tags freely according to purpose, e.g., 'Gift', 'Wishlist', or 'Buy Later'."
+        text3_html: "Created tags can be modified (attached/detached) from the product edit page.<br><span class='text-red-600 font-medium'>※ New tags can be created from the add/edit product page.</span>"
+        notice: "You can also check registered tags from the 'Tag List' page."
+
+      edit:
+        title: "Edit or Delete a Product"
+        text1: "Edit content from the product detail page."
+        text2: "Even if you make a mistake, you can correct it immediately."
+
+      reminder:
+        title: "Check and Manage Reminders"
+        text1: "Set reminders for each product to check them on the calendar."
+        text2: "Today's date is shown in green, and highlights purple on hover."
+        notice_html: "- Reminders can be set on the product add/edit page.<br>- Scheduled reminders can be checked on the 'Calendar' or 'Reminders List' page.<br>- The number of reminders is shown as yellow dots on the calendar."
+
+      account_delete:
+        title: "Delete Account"
+        text1: "You can withdraw anytime from the 'Delete Account' menu (≡)."
+        text2: "All your product data, tags, and other registered information will be deleted."
+
+      back_to_items: "Back to Memo List"
+      back_to_top: "Back to Top Page"
+
+  activerecord:
+    models:
+      tag: "Tag"
+      item: "Item"
+      reminder: "Reminder"
+      user: "User"
+
+    attributes:
+      tag:
+        name: "Name"
+
+      item:
+        memo: "Memo"
+        image: "Image"
+        tag: "Tag"
+        tag_name: "Tag Name"
+
+      reminder:
+        remind_on: "Scheduled Date"
+        item: "Item"
+        user: "User"
+
+      user:
+        name: "Name"
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password (confirmation)"
+
+    errors:
+      models:
+        tag:
+          attributes:
+            name:
+              blank: "can't be blank"
+              taken: "has already been taken"
+
+        item:
+          attributes:
+            memo:
+              too_long: "must be %{count} characters or less"
+
+  date:
+    formats:
+      default: "%Y/%m/%d"
+      long: "%B %-d, %Y"
+
+  devise:
+    omniauth_callbacks:
+      google_oauth2:
+        success: "Logged in with Google"
+
+    registrations:
+      destroyed: "Account deleted. Thank you for using our service."
+
+    sessions:
+      signed_out: "Logged out"
+

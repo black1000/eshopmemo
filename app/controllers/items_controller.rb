@@ -100,13 +100,12 @@ end
           content_type: downloaded_image.content_type || "image/jpeg"
         )
       else
-        Rails.logger.warn "画像が取得できませんでした: #{@item.url}"
+        Rails.logger.warn t('items.create.image_not_found_log', url: @item.url)
       end
 
     rescue => e
-      Rails.logger.error "OGPまたは画像の取得に失敗しました: #{e.message}"
-      flash[:alert] = "画像の取得に失敗しました。URLを確認してください。"
-    ensure
+      Rails.logger.error t('items.create.image_fetch_failed_log', message: e.message)
+      flash[:alert] = t('items.create.image_fetch_failed')
     end
 
     if @item.save
@@ -119,7 +118,7 @@ end
     )
   end
 
-  redirect_to items_path, notice: "商品情報を登録しました"
+  redirect_to items_path, notice: t('items.create.success')
 else
   render :new
 end
@@ -145,9 +144,9 @@ end
     @item.reload
     @item.reminder&.reload 
 
-    redirect_to @item, notice: "商品情報を更新しました"
+    redirect_to @item, notice: t('items.update.success')
   else
-    flash.now[:alert] = "更新に失敗しました"
+    flash.now[:alert] = t('items.update.fail')
     render :edit, status: :unprocessable_entity
   end
 end
@@ -161,7 +160,7 @@ end
       tag.destroy
     end
 
-    redirect_to items_path, notice: "商品を削除しました"
+    redirect_to items_path, notice: t('items.destroy.success')
   end
 
 
@@ -209,7 +208,7 @@ def create_reminder
   @reminder = current_user.reminders.build(reminder_params.merge(item: @item))
 
   if @reminder.save
-    redirect_to @item, notice: "リマインダーを追加しました"
+    redirect_to @item, notice: t('reminders.create.success')
   else
     flash[:alert] = "リマインダーの登録に失敗しました"
     redirect_to @item

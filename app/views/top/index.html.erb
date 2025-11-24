@@ -1,42 +1,60 @@
 <div class="min-h-screen bg-gray-50">
 
   <section class="text-center py-24 bg-white shadow">
-    <h1 class="text-4xl font-bold text-gray-800 mb-4">eShopMemo</h1>
-    <p class="text-lg text-gray-600 mb-8">
-      気になる商品を、迷わず・かんたんに記録する。<br>
-      URLを貼るだけで商品情報を自動で取得します。
-    </p>
-    
-    <%= button_to "Googleでログイン", user_google_oauth2_omniauth_authorize_path,
-        method: :post, class: "nav-item", data: { turbo: false },
-        class: "px-8 py-3 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition" %> 
+    <h1 class="text-4xl font-bold text-gray-800 mb-4">
+      <%= t('top.index.title') %>
+    </h1>
 
+    <p class="text-lg text-gray-600 mb-8">
+      <%= t('top.index.catch_copy') %><br>
+      <%= t('top.index.catch_sub') %>
+    </p>
+
+    <%= button_to t('top.index.login_google'),
+        user_google_oauth2_omniauth_authorize_path,
+        method: :post,
+        data: { turbo: false },
+        class: "px-8 py-3 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition" %>
   </section>
+
 
   <!-- サービス概要 -->
   <section class="max-w-4xl mx-auto text-center py-16 px-6">
-    <h2 class="text-2xl font-bold mb-4 text-gray-800">サービス概要</h2>
+    <h2 class="text-2xl font-bold mb-4 text-gray-800">
+      <%= t('top.index.overview_title') %>
+    </h2>
+
     <p class="text-gray-600 leading-relaxed">
-      eShopMemo は、通販サイトで見つけた商品を
-      URLを貼るだけで保存できる “買い物整理アプリ” です。<br>
-      自動で商品タイトルと画像を取得し、あとで冷静に見返せます。
+      <%= t('top.index.overview_text') %><br>
+      <%= t('top.index.overview_text2') %>
     </p>
   </section>
 
+
+  <!-- おすすめ -->
   <section class="bg-white py-16 px-6">
-    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">こんな人におすすめ</h2>
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
+      <%= t('top.index.recommend_title') %>
+    </h2>
+
     <ul class="max-w-xl mx-auto space-y-3 text-gray-700">
-      <li>・通販の商品を一覧で整理したい人</li>
-      <li>・SNSに共有せず、プライベートに保存したい人</li>
-      <li>・衝動買いを避け、落ち着いて検討したい人</li>
+      <li>・<%= t('top.index.recommend.1') %></li>
+      <li>・<%= t('top.index.recommend.2') %></li>
+      <li>・<%= t('top.index.recommend.3') %></li>
     </ul>
   </section>
 
+
+  <!-- 使い方 -->
   <section class="py-16 px-6">
-    <h2 class="text-2xl font-bold text-center text-gray-800 mb-10">使い方</h2>
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-10">
+      <%= t('top.index.usage_title') %>
+    </h2>
+
+    <% steps = t('top.index.steps') %>
 
     <div class="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto text-center">
-      <% ["URLを貼る", "商品情報を自動取得", "メモ・タグを追加", "一覧で振り返る"].each_with_index do |step, i| %>
+      <% steps.each_with_index do |step, i| %>
         <div class="bg-white shadow rounded-lg p-6">
           <div class="text-indigo-600 text-xl font-bold mb-2"><%= i + 1 %>.</div>
           <p class="text-gray-700"><%= step %></p>
@@ -45,22 +63,31 @@
     </div>
   </section>
 
+
+  <!-- 強み -->
   <section class="bg-gray-100 py-16 px-6">
-    <h2 class="text-2xl font-bold text-center text-gray-800 mb-10">eShopMemo の強み</h2>
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-10">
+      <%= t('top.index.strength_title') %>
+    </h2>
 
     <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-      <div class="bg-white p-6 rounded-lg shadow">複数ECサイトの商品を一元管理</div>
-      <div class="bg-white p-6 rounded-lg shadow">URLだけで商品情報（画像/タイトル）を自動取得</div>
-      <div class="bg-white p-6 rounded-lg shadow">公開前提ではない、完全プライベート設計</div>
-      <div class="bg-white p-6 rounded-lg shadow">考えるための“買い物ノート”として活用できる</div>
+      <div class="bg-white p-6 rounded-lg shadow"><%= t('top.index.strengths.1') %></div>
+      <div class="bg-white p-6 rounded-lg shadow"><%= t('top.index.strengths.2') %></div>
+      <div class="bg-white p-6 rounded-lg shadow"><%= t('top.index.strengths.3') %></div>
+      <div class="bg-white p-6 rounded-lg shadow"><%= t('top.index.strengths.4') %></div>
     </div>
   </section>
 
+
+  <!-- 開発背景 -->
   <section class="py-16 px-6 max-w-3xl mx-auto">
-    <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">開発背景</h2>
+    <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">
+      <%= t('top.index.background_title') %>
+    </h2>
+
     <p class="text-gray-700 leading-relaxed">
-      SNSや通販サイトで気になった商品が、保存先がバラバラで見つからなくなる…。<br>
-      そんな自分の不便から「もっと気軽に商品を記録できるサービスが欲しい」と思い、開発しました。
+      <%= t('top.index.background_text') %><br>
+      <%= t('top.index.background_text2') %>
     </p>
   </section>
 

@@ -3,10 +3,12 @@
     <span>©<%= Time.current.year %> eShopMemo</span>
   </div>
   <div class="footer-bottom">
-    <span class="footer-link text-gray-400 cursor-not-allowed">利用規約（準備中）</span>
-    <%= link_to "プライバシーポリシー", "https://kiyac.app/privacypolicy/vhjMjRP3YV4GePMMSU7v", 
+    <span class="footer-link text-gray-400 cursor-not-allowed">
+      <%= t('layouts.footer.terms_text') %>
+    </span>
+    <%= link_to t('layouts.footer.privacy'), "https://kiyac.app/privacypolicy/vhjMjRP3YV4GePMMSU7v", 
                 class: "footer-link", target: "_blank", rel: "noopener" %>
-    <%= link_to "お問い合わせ", "https://forms.gle/icNJ3JjUTEaXdYV2A", 
+    <%= link_to t('layouts.footer.contact'), "https://forms.gle/icNJ3JjUTEaXdYV2A", 
                 class: "footer-link", target: "_blank", rel: "noopener" %>
   </div>
 </footer>

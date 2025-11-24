@@ -1,5 +1,7 @@
 <div class="max-w-4xl mx-auto px-4 py-6">
-  <h1 class="text-2xl font-bold mb-6 text-gray-800">商品メモ編集</h1>
+  <h1 class="text-2xl font-bold mb-6 text-gray-800">
+    <%= t('items.edit.title')%>
+  </h1>
 
   <%= form_with model: @item, local: true, class: "bg-gray-50 p-6 rounded-lg shadow grid grid-cols-1 md:grid-cols-2 gap-6" do |f| %>
 
@@ -8,7 +10,7 @@
         <%= image_tag @item.image, class: "w-48 h-48 object-cover rounded mb-4" %>
       <% else %>
         <div class="w-48 h-48 flex items-center justify-center bg-gray-200 rounded mb-4 text-gray-500">
-          📷 画像を選択
+          <%= t('items.edit.image')%>
         </div>
       <% end %>
       <%= f.file_field :image, accept: "image/*",
@@ -17,7 +19,7 @@
 
     <div class="space-y-4">
       <div>
-        <%= f.label :title, "商品名", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.label :title, t('items.edit.item_title'), class: "block text-sm font-medium text-gray-700 mb-1" %>
         <%= f.text_field :title, class: "w-full border-gray-300 rounded-md shadow-sm" %>
       </div>
 
@@ -33,13 +35,12 @@
     <button type="button"
       id="clear-url"
       class="bg-gray-100 border border-gray-300 rounded-r-md px-3 py-2 text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-800 transition">
-      クリア
+      <%= t('items.edit.clear')%>
     </button>
   </div>
 
   <p class="text-xs text-gray-500 mt-1">
-    リンクが無効になった場合は新しいURLを入力してください
-  </p>
+    <%= t('items.edit.url_change')%>
 </div>
 
 <script>
@@ -58,31 +59,31 @@
 
 
       <div>
-        <%= f.label :memo, "メモ（30文字以内）", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.label :memo, t('items.new.memo'), class: "block text-sm font-medium text-gray-700 mb-1" %>
         <%= f.text_area :memo,
                          rows: 3,
                          maxlength: 30,
                          class: "w-full border-gray-300 rounded-md shadow-sm",
-                         placeholder: "メモ（30文字以内）" %>
+                         placeholder: t('items.edit.memo') %>
       </div>
 
       <div>
-        <%= f.label :tag_id, "タグ", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.label :tag_id, t('items.edit.tag'), class: "block text-sm font-medium text-gray-700 mb-1" %>
         <%= f.collection_select :tag_id,
               current_user.tags, :id, :name,
-              { include_blank: "タグなし" },
+              { include_blank: t('items.edit.no_tag') },
               class: "w-full border-gray-300 rounded-md shadow-sm" %>
       </div>
 
       <div>
   <label class="block text-sm font-medium text-gray-700 mb-1">
-    新しいタグを作成（任意）
+    <%= t('items.edit.new_tag') %>
   </label>
   <input type="text" name="new_tag_name"
          class="w-full border-gray-300 rounded-md shadow-sm"
-         placeholder="新しいタグ名を入力" >
+         placeholder=<% t('items.edit.new.tag.title')%> >
   <p class="text-xs text-gray-500 mt-1">
-    ※ 入力すると上のタグ選択は無視され、新しいタグが自動で作成されます
+    <%= t('items.edit.tag_text') %>
   </p>
 </div>
 
@@ -90,7 +91,7 @@
   <%= r.hidden_field :id %>
 
   <div class="mb-4">
-    <%= r.label :scheduled_date, "リマインダー日" %>
+    <%= r.label :scheduled_date, t('items.edit.reminder') %>
     <%= r.date_field :scheduled_date,
     class: "border-2 border-yellow-300 rounded-mb px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 w-full" %>
   </div>
@@ -98,10 +99,10 @@
 <% end %>
 
       <div class="flex justify-between items-center pt-4">
-        <%= link_to "← 商品メモ一覧に戻る", items_path,
+        <%= link_to t('items.edit.back_memo'), items_path,
           class: "px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600" %>
 
-        <%= f.submit "更新する",
+        <%= f.submit t('items.edit.submit'),
           class: "px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" %>
       </div>
     </div>

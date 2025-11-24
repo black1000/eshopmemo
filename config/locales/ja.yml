@@ -1,0 +1,272 @@
+ja:
+  top:
+    index:
+      title: "eShopMemo"
+      catch_copy: "気になる商品を、迷わず・かんたんに記録する。"
+      catch_sub: "URLを貼るだけで商品情報を自動で取得します。"
+      login_google: "Googleでログイン"
+
+      overview_title: "サービス概要"
+      overview_text: "eShopMemo は、通販サイトで見つけた商品をURLを貼るだけで保存できる “買い物整理アプリ” です。"
+      overview_text2: "自動で商品タイトルと画像を取得し、あとで冷静に見返せます。"
+
+      recommend_title: "こんな人におすすめ"
+      recommend:
+        1: "通販の商品を一覧で整理したい人"
+        2: "SNSに共有せず、プライベートに保存したい人"
+        3: "衝動買いを避け、落ち着いて検討したい人"
+
+      usage_title: "使い方"
+      steps:
+        - "URLを貼る"
+        - "商品情報を自動取得"
+        - "メモ・タグを追加"
+        - "一覧で振り返る"
+
+      strength_title: "eShopMemo の強み"
+      strengths:
+        1: "複数ECサイトの商品を一元管理"
+        2: "URLだけで商品情報（画像/タイトル）を自動取得"
+        3: "公開前提ではない、完全プライベート設計"
+        4: "考えるための“買い物ノート”として活用できる"
+
+      background_title: "開発背景"
+      background_text: "SNSや通販サイトで気になった商品が、保存先がバラバラで見つからなくなる…。"
+      background_text2: "そんな自分の不便から「もっと気軽に商品を記録できるサービスが欲しい」と思い、開発しました。"
+
+
+  items:
+    index:
+      title: "メモ一覧"
+      plan_list: "予定一覧"
+      no_items: "まだ商品が登録されていません。"
+      calendar: "カレンダー"
+      weekdays:
+        - "日"
+        - "月"
+        - "火"
+        - "水"
+        - "木"
+        - "金"
+        - "土"
+
+    show:
+      no_title: "タイトルなし"
+      memo: "メモ"
+      no_memo: "メモなし"
+      no_date: "日付なし"
+      details: "詳細を見る"
+      title: "詳細ページ"
+      back_memo: "メモ一覧に戻る"
+      edit: "編集"
+      item_title: "商品名"
+      item_text: "登録されたURLはありません。"
+      tag: "タグ"
+      no_tag: "タグなし"
+      reminder: "予定日"
+      no_reminder: "日付なし"
+      delete: "削除"
+      delete_text: "本当に削除しますか？"
+
+    new:
+      title: "メモ追加"
+      submit: "追加する"
+      item_url: "商品URL"
+      url_text: "商品ページのURLを入力"
+      item_title: "タイトル"
+      item_text: "商品タイトルを入力"
+      image: "商品画像"
+      image_text: "※ 画像がない場合は自動でOGP画像が設定されます。"
+      memo: "メモ"
+      memo_text: "メモ（30文字以内）"
+      tag: "既存タグを選択"
+      no_tag: "タグなし"
+      new_tag: "新しいタグを作成"
+      new_tag_text: "新しいタグ名を入力"
+      reminder: "予定日"
+      back_memo: "戻る"
+      select_file_button: "ファイルを選択"
+      file_not_selected_placeholder: "ファイルを選択してください"
+
+    edit:
+      title: "メモ編集"
+      submit: "更新する"
+      image: "📷 画像を選択"
+      item_title: "商品名"
+      clear: "クリア"
+      url_change: "リンクが無効になった場合は新しいURLを入力してください"
+      memo: "メモ（30文字以内）"
+      tag: "タグ"
+      no_tag: "タグなし"
+      new_tag: "新しいタグを作成（任意）"
+      new_tag_title: "新しいタグ名を入力"
+      tag_text: "※ 入力すると上のタグ選択は無視され、新しいタグが自動で作成されます"
+      reminder: "予定日"
+      back_memo: "メモ一覧に戻る"
+
+    reminders:
+      back_memo: "メモ一覧に戻る"
+      year_and_month: "%Y年%m月%d日の予定"
+      memo: "メモ"
+      no_memo: "なし"
+      reminder_text: "この日に登録された予定はありません。"
+
+    reminder:
+      title: "予定一覧"
+      back_memo: "メモ一覧に戻る"
+      no_item: "商品なし"
+      no_title: "タイトルなし"
+      no_date: "日付なし"
+      memo: "メモ"
+      no_memo: "メモなし"
+      detail: "詳細を見る"
+
+    tag:
+      back_detail: "詳細へ戻る"
+      back_memo: "メモ一覧に戻る"
+      tag_name_text: "のメモ一覧"
+      tag_search: "タグ検索"
+      text: "タグが登録されていません。"
+      no_title: "タイトルなし"
+      memo: "メモ"
+      no_memo: "メモなし"
+      no_date: "日付なし"
+      detail: "詳細を見る"
+      no_item: "まだ商品が登録されていません。"
+
+    tags:
+      title: "タグ一覧"
+      text: "タグが登録されていません。"
+
+    create:
+      success: "商品情報を登録しました"
+      image_fetch_failed: "画像の取得に失敗しました。URLを確認してください。"
+      image_not_found_log: "画像が取得できませんでした: %{url}"
+      image_fetch_failed_log: "OGPまたは画像の取得に失敗しました: %{message}"
+
+    update:
+      success: "商品情報を更新しました"
+      fail: "更新に失敗しました"
+
+    destroy:
+      success: "商品を削除しました"
+
+
+  layouts:
+    footer:
+      terms_text: "利用規約（準備中）"
+      privacy: "プライバシーポリシー"
+      contact: "お問い合わせ"
+
+    header:
+      new_item: "+ 商品メモ追加"
+      tag_list: "タグ一覧"
+      login: "ログイン中"
+      tutorial: "使い方"
+      account_delete: "アカウント削除"
+      delete_text: "本当に削除しますか？"
+      logout: "ログアウト"
+      google_login: "Googleでログイン"
+
+
+  pages:
+    tutorial:
+      title: "使い方ガイド"
+      subtitle: "eShopMemo の基本操作をまとめました。"
+
+      login:
+        title: "Googleでログイン"
+        text1: "Googleアカウントで簡単にログインできます。"
+        text2: "パスワードの新規作成は不要で、安全に利用できます。"
+
+      memo:
+        title: "商品をメモする"
+        text1: "気になる商品のURLを入力すると、自動で商品名と画像を取得します。"
+        text2: "「ほしい理由」や「メモ」も自由に追加できます。"
+        notice_html: "※ Amazonや一部のブランド公式サイトでは、<strong class='font-semibold'>セキュリティ設定</strong> により画像を自動取得できない場合があります。<br>その際は、<span class='font-semibold text-yellow-600'>商品編集ページから手動で画像を追加</span>できます。"
+
+      tags:
+        title: "タグの使い方・管理"
+        text1: "商品にタグを付けてジャンルごとに分類できます。"
+        text2: "「プレゼント」「欲しいもの」「あとで買う」など、用途に合わせて自由にタグを作成できます。"
+        text3_html: "作成したタグは、商品編集ページで <span class='font-semibold'>付け外しの変更が可能</span> です。<br><span class='text-red-600 font-medium'>※ 新しいタグの作成は、新規登録ページや商品編集ページから行えます。</span>"
+        notice: "登録済みタグは「タグ一覧ページ」から確認できます。"
+
+      edit:
+        title: "商品を編集・削除する"
+        text1: "商品詳細ページから内容を編集できます。"
+        text2: "間違えて登録してもすぐ修正できます。"
+
+      reminder:
+        title: "リマインダーを確認・管理する"
+        text1: "商品ごとにリマインダーを設定すると、設定した日をカレンダー上で確認できます。"
+        text2: "今日の日付は緑で表示され、マウスを合わせると紫色にハイライトされます。"
+        notice_html: "- 商品登録ページまたは商品編集ページでリマインダーを設定できます。<br>- 設定したリマインダーは「カレンダー」や「リマインダー一覧ページ」で確認可能です。<br>- 件数はカレンダー内の黄色の丸で表示されます。"
+
+      account_delete:
+        title: "アカウント削除"
+        text1: "メニュー（≡）内の「アカウント削除」からいつでも退会できます。"
+        text2: "商品データ・タグなど、登録した情報はすべて削除されます。"
+
+      back_to_items: "メモ一覧に戻る"
+      back_to_top: "トップページに戻る"
+
+
+  activerecord:
+    models:
+      tag: タグ
+      item: アイテム
+      reminder: リマインダー
+      user: ユーザー
+
+    attributes:
+      tag:
+        name: 名前
+
+      item:
+        memo: メモ
+        image: 画像
+        tag: タグ
+        tag_name: タグ名
+
+      reminder:
+        remind_on: リマインド日
+        item: アイテム
+        user: ユーザー
+
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認）
+
+    errors:
+      models:
+        tag:
+          attributes:
+            name:
+              blank: "を入力してください"
+              taken: "はすでに登録されています"
+
+        item:
+          attributes:
+            memo:
+              too_long: "%{count}文字以内で入力してください"
+
+
+  date:
+    formats:
+      default: "%Y/%m/%d"
+      long: "%Y年%-m月%-d日"
+
+
+  devise:
+    omniauth_callbacks:
+      google_oauth2:
+        success: "Googleでログインしました"
+
+    registrations:
+      destroyed: "アカウントを削除しました。ご利用ありがとうございました。"
+
+    sessions:
+      signed_out: "ログアウトしました"

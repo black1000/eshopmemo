@@ -1,6 +1,6 @@
 <div class="container mx-auto px-4">
   <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-    商品メモ追加
+    <%= t('items.new.title') %>
   </h1>
 
   <div class="bg-white rounded-xl shadow p-6 max-w-xl mx-auto">
@@ -9,64 +9,107 @@
 
       <!-- URL -->
       <div class="mb-4">
-        <%= f.label :url, "商品URL", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.label :url, t('items.new.item_url'), class: "block text-sm font-medium text-gray-700 mb-1" %>
         <%= f.text_field :url, required: true,
           class: "border-2 border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 w-full",
-          placeholder: "商品ページのURLを入力" %>
+          placeholder: t('items.new.url_text') %>
       </div>
 
       <!-- タイトル -->
       <div class="mb-4">
-        <%= f.label :title, "タイトル", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.label :title, t('items.new.item_title'), class: "block text-sm font-medium text-gray-700 mb-1" %>
         <%= f.text_field :title,
           class: "border-2 border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 w-full",
-          placeholder: "商品タイトルを入力" %>
+          placeholder: t('items.new.item_text') %>
       </div>
 
       <!-- 画像 -->
-      <div class="mb-4">
-        <%= f.label :image, "商品画像", class: "block text-sm font-medium text-gray-700 mb-1" %>
-        <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png',
-          class: "mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" %>
-        <p class="mt-1 text-xs text-gray-500">※ 画像がない場合は自動でOGP画像が設定されます。</p>
-      </div>
+      <div class="mb-4" data-controller="file-input">
+  <%= f.label :image, t('items.new.image'), class: "block text-sm font-medium text-gray-700 mb-1" %>
+  
+  <div class="flex items-center space-x-2">
+    <%= f.file_field :image, 
+      accept: 'image/jpeg,image/gif,image/png',
+      class: "hidden", 
+      id: "custom_image_input",
+      data: { action: "change->file-input#updateText" }
+    %>
+    
+    <label for="custom_image_input" 
+      class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded cursor-pointer transition duration-150">
+      <%= t('items.new.select_file_button') %>
+    </label>
+    
+    <span id="file_name_display" class="text-sm text-gray-500">
+      <%= t('items.new.file_not_selected_placeholder') %>
+    </span>
+  </div>
+
+  <p class="mt-1 text-xs text-gray-500">
+    <%=t('items.new.image_text')%>
+  </p>
+</div>
+
+<script>
+  // DOMContentLoadedを待ってから処理を実行
+  document.addEventListener('DOMContentLoaded', () => {
+    const fileInput = document.getElementById('custom_image_input');
+    const displaySpan = document.getElementById('file_name_display');
+    const defaultText = "<%= j t('items.new.file_not_selected_placeholder') %>"; // I18nの未選択メッセージ
+
+    fileInput.addEventListener('change', (event) => {
+      if (event.target.files.length > 0) {
+        // ファイルが選択された場合、ファイル名を表示
+        displaySpan.textContent = event.target.files[0].name;
+      } else {
+        // ファイルがクリアされた場合、未選択のメッセージに戻す
+        displaySpan.innerHTML = defaultText;
+      }
+    });
+
+    // 初期表示時もデフォルトメッセージを設定
+    if (fileInput.files.length === 0) {
+        displaySpan.innerHTML = defaultText;
+    }
+  });
+</script>
 
       <!-- メモ -->
       <div class="mb-4">
-        <%= f.label :memo, "メモ", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.label :memo, t('items.new.memo'), class: "block text-sm font-medium text-gray-700 mb-1" %>
         <%= f.text_area :memo, 
               rows: 4,
               maxlength: 20,
           class: "border-2 border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 w-full",
-          placeholder: "メモ（30文字以内）" %>
+          placeholder: t('items.new.memo_text') %>
       </div>
 
       <!-- タグ -->
       <div class="mb-4">
-        <%= f.label :tag_id, "既存タグを選択", class: "block mb-1" %>
+        <%= f.label :tag_id, t('items.new.tag'), class: "block mb-1" %>
         <%= f.collection_select :tag_id,
           current_user.tags, :id, :name,
-          { include_blank: "タグなし" },
+          { include_blank: t('items.new.no_tag') },
           class: "w-full border rounded px-2 py-1" %>
       </div>
 
       <div class="mb-4">
-        <%= f.label :new_tag, "新しいタグを作成", class: "block mb-1" %>
-        <%= f.text_field :new_tag, placeholder: "新しいタグ名を入力", class: "w-full border rounded px-2 py-1" %>
+        <%= f.label :new_tag, t('items.new.new_tag'), class: "block mb-1" %>
+        <%= f.text_field :new_tag, placeholder: t('items.new.new_tag_text'), class: "w-full border rounded px-2 py-1" %>
       </div>
 
       <div class="mb-4">
-        <%= f.label :scheduled_date, "リマインダー日", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.label :scheduled_date, t('items.new.reminder'), class: "block text-sm font-medium text-gray-700 mb-1" %>
         <%= f.date_field :scheduled_date,
         class:  "border-2 border-yellow-300 rounded-mb px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 w-full" %>
       </div>
 
       <!-- ボタン -->
       <div class="flex items-center gap-4">
-        <%= f.submit "追加する",
+        <%= f.submit t('items.new.submit'),
           class: "w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2 rounded-lg shadow cursor-pointer transition duration-150" %>
 
-        <%= link_to "戻る", items_path,
+        <%= link_to t('items.new.back_memo'), items_path,
           class: "hidden sm:block bg-gray-500 hover:bg-gray-600 text-white font-semibold px-4 py-2 rounded-lg shadow transition duration-150" %>
       </div>
 

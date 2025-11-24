@@ -1,7 +1,9 @@
 <div class="flex items-center justify-between mb-6">
-  <h1 class="text-2xl font-bold text-gray-800">商品一覧</h1>
+  <h1 class="text-2xl font-bold text-gray-800">
+    <%= t('items.index.title')%>
+  </h1>
 
-  <%= link_to "リマインダー一覧", reminders_items_path,
+  <%= link_to t('items.index.plan_list'), reminders_items_path,
       class: "bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-4 py-2 rounded shadow" %>
 </div>
 
@@ -31,21 +33,21 @@
               <!-- 商品情報 -->
               <div class="flex-1">
                 <h2 class="text-lg font-semibold text-blue-700 hover:underline break-words">
-                  <%= link_to (item.try(:title).presence || "タイトルなし"),
+                  <%= link_to (item.try(:title).presence || t('items.show.no_title')),
                         (item.url.presence || "#"),
                         target: "_blank" %>
                 </h2>
 
                 <p class="text-sm text-gray-600 mt-1 break-all whitespace-normal">
-                  メモ：<%= item.try(:memo).presence || "メモなし" %>
+                  <%= t('items.show.memo') %>：<%= item.try(:memo).presence || t('items.show.no_memo') %>
                 </p>
 
                 <p class="text-sm text-gray-600 mt-1">
-                  📅 <%= item.reminder&.scheduled_date&.strftime("%Y-%m-%d") || "日付なし" %>
+                  📅 <%= item.reminder&.scheduled_date&.strftime("%Y-%m-%d") || t('items.show.no_date') %>
                 </p>
 
                 <div class="mt-2">
-                  <%= link_to "詳細を見る", item_path(item),
+                  <%= link_to t('items.show.details'), item_path(item),
                       class: "text-sm text-gray-500 hover:text-gray-700 underline" %>
                 </div>
               </div>
@@ -55,7 +57,7 @@
         <% end %>
       <% else %>
         <p class="text-gray-600 text-center mt-8 col-span-2">
-          まだ商品が登録されていません。
+          <%= t('items.index.no_items')%>
         </p>
       <% end %>
     </div>
@@ -68,7 +70,9 @@
 
   <!-- カレンダー-->
   <div class="lg:col-span-1 flex flex-col gap-4 sticky top-4 h-fit">
-  <h2 class="text-2xl font-bold text-gray-800">カレンダー</h2>
+  <h2 class="text-2xl font-bold text-gray-800">
+    <%= t('items.index.calendar')%>
+  </h2>
 
   <% today = Date.current %>
   <% first_day = today.beginning_of_month %>
@@ -77,7 +81,7 @@
   <table class="w-full border-collapse text-sm table-fixed bg-white rounded-lg shadow overflow-visible">
     <thead>
       <tr>
-        <% ["日", "月", "火", "水", "木", "金", "土"].each do |day| %>
+        <% I18n.t('items.index.weekdays').each do |day| %>  
           <th class="p-2 bg-gray-200 border text-xs lg:text-sm"><%= day %></th>
         <% end %>
       </tr>

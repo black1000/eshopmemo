@@ -1,115 +1,106 @@
 <div class="max-w-3xl mx-auto mt-10 px-4">
 
-  <h1 class="text-3xl font-bold mb-3">使い方ガイド</h1>
-  <p class="text-gray-500 mb-10">eShopMemo の基本操作をまとめました。</p>
+  <h1 class="text-3xl font-bold mb-3">
+    <%= t("pages.tutorial.title") %>
+  </h1>
+  <p class="text-gray-500 mb-10">
+    <%= t("pages.tutorial.subtitle") %>
+  </p>
 
-  <!-- Section -->
-
+  <!-- Section 1 -->
   <section class="mb-10">
     <h2 class="text-xl font-semibold border-l-4 border-yellow-500 pl-3 mb-3">
-      1. Googleでログイン
+      1. <%= t("pages.tutorial.login.title") %>
     </h2>
     <p class="leading-relaxed text-gray-700">
-      Googleアカウントで簡単にログインできます。
-      <br>
-      パスワードの新規作成は不要で、安全に利用できます。
+      <%= t("pages.tutorial.login.text1") %><br>
+      <%= t("pages.tutorial.login.text2") %>
     </p>
   </section>
 
-  <section class="mb-10">
-  <h2 class="text-xl font-semibold border-l-4 border-yellow-500 pl-3 mb-3">
-    2. 商品をメモする
-  </h2>
-
-  <p class="leading-relaxed text-gray-700 mb-3">
-    気になる商品のURLを入力すると、自動で商品名と画像を取得します。
-    <br>
-    「ほしい理由」や「メモ」も自由に追加できます。
-  </p>
-
-  <div class="bg-gray-100 border border-gray-300 rounded-md p-4 text-sm text-gray-700">
-    ※ Amazonや一部のブランド公式サイトでは、
-    <strong class="font-semibold">セキュリティ設定</strong> により
-    画像を自動取得できない場合があります。
-    <br>
-    その際は、
-    <span class="font-semibold text-yellow-600">商品編集ページから手動で画像を追加</span>
-    できます。
-  </div>
-</section>
-
-  <section class="mb-10">
-  <h2 class="text-xl font-semibold border-l-4 border-yellow-500 pl-3 mb-3">
-    3. タグの使い方・管理
-  </h2>
-
-  <p class="leading-relaxed text-gray-700">
-    商品にタグを付けてジャンルごとに分類できます。
-    <br>
-    「プレゼント」「欲しいもの」「あとで買う」など、用途に合わせて自由にタグを作成できます。
-  </p>
-
-  <p class="leading-relaxed text-gray-700 mt-3">
-    作成したタグは、商品編集ページで
-    <span class="font-semibold">付け外しの変更が可能</span>
-    です。
-    <br>
-    <span class="text-red-600 font-medium">※ 新しいタグの作成は、新規登録ページや商品編集ページから行えます。</span>
-  </p>
-
-  <div class="bg-gray-100 border border-gray-300 rounded-md p-4 text-sm text-gray-700 mt-4">
-    登録済みタグは「タグ一覧ページ」から確認できます。
-  </div>
-</section>
+  <!-- Section 2 -->
   <section class="mb-10">
     <h2 class="text-xl font-semibold border-l-4 border-yellow-500 pl-3 mb-3">
-      4. 商品を編集・削除する
+      2. <%= t("pages.tutorial.memo.title") %>
+    </h2>
+
+    <p class="leading-relaxed text-gray-700 mb-3">
+      <%= t("pages.tutorial.memo.text1") %><br>
+      <%= t("pages.tutorial.memo.text2") %>
+    </p>
+
+    <div class="bg-gray-100 border border-gray-300 rounded-md p-4 text-sm text-gray-700">
+      <%= t("pages.tutorial.memo.notice_html") %>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section class="mb-10">
+    <h2 class="text-xl font-semibold border-l-4 border-yellow-500 pl-3 mb-3">
+      3. <%= t("pages.tutorial.tags.title") %>
+    </h2>
+
+    <p class="leading-relaxed text-gray-700">
+      <%= t("pages.tutorial.tags.text1") %><br>
+      <%= t("pages.tutorial.tags.text2") %>
+    </p>
+
+    <p class="leading-relaxed text-gray-700 mt-3">
+      <%= t("pages.tutorial.tags.text3_html") %>
+    </p>
+
+    <div class="bg-gray-100 border border-gray-300 rounded-md p-4 text-sm text-gray-700 mt-4">
+      <%= t("pages.tutorial.tags.notice") %>
+    </div>
+  </section>
+
+  <!-- Section 4 -->
+  <section class="mb-10">
+    <h2 class="text-xl font-semibold border-l-4 border-yellow-500 pl-3 mb-3">
+      4. <%= t("pages.tutorial.edit.title") %>
     </h2>
     <p class="leading-relaxed text-gray-700">
-      商品詳細ページから内容を編集できます。
-      <br>
-      間違えて登録してもすぐ修正できます。
+      <%= t("pages.tutorial.edit.text1") %><br>
+      <%= t("pages.tutorial.edit.text2") %>
     </p>
   </section>
 
-  <section class="mb-10">
-  <h2 class="text-xl font-semibold border-l-4 border-yellow-500 pl-3 mb-3">
-    5. リマインダーを確認・管理する
-  </h2>
-
-  <p class="leading-relaxed text-gray-700 mb-3">
-    商品ごとにリマインダーを設定すると、設定した日をカレンダー上で確認できます。
-    <br>
-    今日の日付は緑で表示され、マウスを合わせると紫色にハイライトされます。
-  </p>
-
-  <div class="bg-gray-100 border border-gray-300 rounded-md p-4 text-sm text-gray-700">
-    - 商品登録ページまたは商品編集ページでリマインダーを設定できます。<br>
-    - 設定したリマインダーは「カレンダー」や「リマインダー一覧ページ」で確認可能です。<br>
-    - 件数はカレンダー内の黄色の丸で表示されます。
-  </div>
-</section>
-
-
+  <!-- Section 5 -->
   <section class="mb-10">
     <h2 class="text-xl font-semibold border-l-4 border-yellow-500 pl-3 mb-3">
-      6. アカウント削除
+      5. <%= t("pages.tutorial.reminder.title") %>
+    </h2>
+
+    <p class="leading-relaxed text-gray-700 mb-3">
+      <%= t("pages.tutorial.reminder.text1") %><br>
+      <%= t("pages.tutorial.reminder.text2") %>
+    </p>
+
+    <div class="bg-gray-100 border border-gray-300 rounded-md p-4 text-sm text-gray-700">
+      <%= t("pages.tutorial.reminder.notice_html") %>
+    </div>
+  </section>
+
+  <!-- Section 6 -->
+  <section class="mb-10">
+    <h2 class="text-xl font-semibold border-l-4 border-yellow-500 pl-3 mb-3">
+      6. <%= t("pages.tutorial.account_delete.title") %>
     </h2>
     <p class="leading-relaxed text-gray-700">
-      メニュー（≡）内の「アカウント削除」からいつでも退会できます。
-      <br>
-      商品データ・タグなど、登録した情報はすべて削除されます。
+      <%= t("pages.tutorial.account_delete.text1") %><br>
+      <%= t("pages.tutorial.account_delete.text2") %>
     </p>
   </section>
+
   <% if user_signed_in? %>
-<div class="mt-12 text-center">
-    <%= link_to "商品一覧に戻る", items_path,
-          class: "inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-lg shadow" %>
-  </div>
-<% else %>
-  <div class="mt-12 text-center">
-    <%= link_to "トップページに戻る", root_path,
-          class: "inline-block bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg shadow" %>
-  </div>
-<% end %>
+    <div class="mt-12 text-center">
+      <%= link_to t("pages.tutorial.back_to_items"), items_path,
+        class: "inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-lg shadow" %>
+    </div>
+  <% else %>
+    <div class="mt-12 text-center">
+      <%= link_to t("pages.tutorial.back_to_top"), root_path,
+        class: "inline-block bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg shadow" %>
+    </div>
+  <% end %>
 </div>

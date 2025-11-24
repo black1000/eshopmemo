@@ -1,7 +1,9 @@
 <div class="flex items-center justify-between mb-6">
-  <h1 class="text-2xl font-bold text-gray-800">リマインダー一覧</h1>
+  <h1 class="text-2xl font-bold text-gray-800">
+    <%= t('items.reminder.title') %>
+  </h1>
   <div class="mt-10">
-    <%= link_to "← 商品メモ一覧に戻る", items_path,
+    <%= link_to t('items.reminder.back_memo'), items_path,
           class: "px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600" %>
   </div>
 </div>
@@ -30,7 +32,9 @@
                 <% end %>
               <% else %>
                 <div class="w-32 h-32 bg-gray-200 rounded-lg flex items-center justify-center">
-                  <span class="text-gray-500 text-sm">商品なし</span>
+                  <span class="text-gray-500 text-sm">
+                    <%= t('items.reminder.no_item') %>
+                  </span>
                 </div>
               <% end %>
 
@@ -38,22 +42,22 @@
               <div class="flex-1">
                 <h2 class="text-lg font-semibold text-blue-700 break-words">
                   <% if reminder.item %>
-                    <%= link_to (reminder.item.title || "タイトルなし"), item_path(reminder.item), class: "hover:underline" %>
+                    <%= link_to (reminder.item.title || t('items.reminder.no_title')), item_path(reminder.item), class: "hover:underline" %>
                   <% else %>
-                    (商品なし)
+                    (<%= t('items.reminder.no_item') %>)
                   <% end %>
                 </h2>
 
                 <p class="text-sm text-gray-600 mt-1">
-                  📅 <%= reminder.scheduled_date&.strftime("%Y-%m-%d") || "日付なし" %>
+                  📅 <%= reminder.scheduled_date&.strftime("%Y-%m-%d") || t('items.reminder.no_date') %>
                 </p>
 
                 <p class="text-sm text-gray-700 mt-1">
-                  メモ：<%= reminder.memo.presence || "メモなし" %>
+                  <%= t('items.reminder.memo') %>：<%= reminder.memo.presence || t('items.reminder.no_memo') %>
                 </p>
 
                 <div class="mt-2">
-                  <%= link_to "詳細を見る", item_path(reminder.item),
+                  <%= link_to t('items.reminder.detail'), item_path(reminder.item),
                     class: "text-sm text-gray-500 hover:text-gray-700 underline" %>
                 </div>
 
@@ -64,7 +68,7 @@
         <% end %>
       <% else %>
         <p class="text-gray-600 text-center mt-8 col-span-2">
-          まだリマインダーが登録されていません。
+          まだ予定が登録されていません。
         </p>
       <% end %>
     </div>

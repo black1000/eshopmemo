@@ -1,11 +1,11 @@
 <div class="mt-10">
-    <%= link_to "← 商品メモ一覧に戻る", items_path,
+    <%= link_to t('items.reminders.back_memo'), items_path,
         class: "px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600" %>
 </div>
 
 <div class="p-4 max-w-2xl mx-auto">
   <h2 class="text-2xl font-bold mb-4">
-    <%= @date.strftime("%Y年%m月%d日のリマインダー") %>
+    <%= @date.strftime(t('items.reminders.year_and_month')) %>  
   </h2>
 
   <% if @reminders.any? %>
@@ -24,12 +24,14 @@
 
           <div>
             <p class="font-semibold"><%= reminder.item.title %></p>
-            <p class="text-sm text-gray-600 mt-1 break-all whitespace-normal">メモ: <%= reminder.item.memo.presence || "なし" %></p>
+            <p class="text-sm text-gray-600 mt-1 break-all whitespace-normal"><%= t('items.reminders.memo') %>: <%= reminder.item.memo.presence || t('items.reminders.no_memo') %></p>
           </div>
         <% end %>
       <% end %>
     </div>
   <% else %>
-    <p class="text-gray-500">この日に登録されたリマインダーはありません。</p>
+    <p class="text-gray-500">
+      <%= t('items.reminders.reminder_text') %>
+    </p>
   <% end %>
 </div>

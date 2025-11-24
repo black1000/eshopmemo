@@ -10,6 +10,8 @@ module Shopmemp1
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
+    
+    config.i18n.default_locale = :ja
 
     # SolidQueueを使わず、asyncに変更
     config.active_job.queue_adapter = :async
