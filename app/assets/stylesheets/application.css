@@ -25,7 +25,9 @@ body {
 /* ロゴのスタイル */
 .logo-link {
     color: #D4AF37;
-    font-size: 24px;
+    /* Google Fonts */
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
     font-weight: bold;
     text-decoration: none;
     letter-spacing: 1px;
