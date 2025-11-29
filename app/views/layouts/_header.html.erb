@@ -15,12 +15,12 @@
     <% end %>
 
     <% if user_signed_in? %>
-      <div class="login-status-mobile">
+      <div class="login-status-area"> 
         <span class="user-info nav-item">
           <%= t('layouts.header.login') %>
         </span>
       </div>
-      <% end %>
+    <% end %>
     <!-- ここまでがログインしている時だけ -->
 
     <!-- ハンバーガー -->
@@ -39,7 +39,7 @@
       <% end %>
 
       <li><%= link_to t('layouts.header.tutorial'), tutorial_path %></li>
-
+      
       <% if user_signed_in? %>
         <li><%= link_to t('layouts.header.account_delete'), user_registration_path,
               data: { turbo_confirm: t('layouts.header.delete_text'), turbo_method: :delete } %></li>
