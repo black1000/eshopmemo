@@ -212,6 +212,7 @@ main {
   padding: 10px;
   color:#D4AF37;
   z-index: 1001;
+  margin-left: auto;
 }
 
 .hamburger-menu {
