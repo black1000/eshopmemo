@@ -34,9 +34,11 @@ body {
 }
 
 /* ナビゲーションリンクエリア */
-.nav-links nav {
+.nav-links {
     display: flex;
     align-items: center;
+    gap: 20px;
+    white-space: nowrap;
 }
 
 .nav-item {
