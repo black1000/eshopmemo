@@ -240,13 +240,7 @@ main {
   text-decoration: none;
 }
 
-/* PC（768px以上）の時はハンバーガーメニュー側の「商品追加」「タグ一覧」を非表示 */
-@media (min-width: 769px) {
-  .hamburger-menu li:nth-child(1),
-  .hamburger-menu li:nth-child(2) {
-    display: none !important;
-  }
-}
+
 
 /* モバイル対応のためのメディアクエリ (画面幅 768px 以下)  */
 @media (max-width: 768px) {
@@ -302,4 +296,18 @@ main {
         min-width: unset;
         padding-right: 0;
     }
+}
+
+/* PCでは .mobile-only を非表示 */
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+/* スマホでは PCリンクを非表示 */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none !important;
+  }
 }

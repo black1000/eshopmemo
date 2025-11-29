@@ -15,7 +15,7 @@
     <% end %>
 
     <% if user_signed_in? %>
-      <div class="login-status-area"> 
+      <div class="login-status-area login-status-mobile"> 
         <span class="user-info nav-item">
           <%= t('layouts.header.login') %>
         </span>
@@ -34,8 +34,8 @@
   <div class="hamburger-menu" id="hamburger-menu">
     <ul>
       <% if user_signed_in? %>
-        <li><%= link_to t('layouts.header.new_item'), new_item_path %></li>
-        <li><%= link_to t('layouts.header.tag_list'), tags_path %></li>
+        <li class="mobile-only"><%= link_to t('layouts.header.new_item'), new_item_path %></li>
+        <li class="mobile-only"><%= link_to t('layouts.header.tag_list'), tags_path %></li>
       <% end %>
 
       <li><%= link_to t('layouts.header.tutorial'), tutorial_path %></li>
