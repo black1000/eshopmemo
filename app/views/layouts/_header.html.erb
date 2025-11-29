@@ -1,5 +1,5 @@
 <header class="app-header">
-  <div class="nav-bar">
+  <div class="nav-bar px-4 sm:px-6 lg:px-8">
 
     <!-- ロゴ -->
     <div class="logo">
@@ -11,12 +11,16 @@
       <div class="nav-links">
         <%= link_to t('layouts.header.new_item'), new_item_path, class: "nav-item" %>
         <%= link_to t('layouts.header.tag_list'), tags_path, class: "nav-item" %>
+      </div>
+    <% end %>
 
+    <% if user_signed_in? %>
+      <div class="login-status-mobile">
         <span class="user-info nav-item">
           <%= t('layouts.header.login') %>
         </span>
       </div>
-    <% end %>
+      <% end %>
     <!-- ここまでがログインしている時だけ -->
 
     <!-- ハンバーガー -->
@@ -29,6 +33,11 @@
   <!-- ハンバーガーメニュー内容 -->
   <div class="hamburger-menu" id="hamburger-menu">
     <ul>
+      <% if user_signed_in? %>
+        <li><%= link_to t('layouts.header.new_item'), new_item_path %></li>
+        <li><%= link_to t('layouts.header.tag_list'), tags_path %></li>
+      <% end %>
+
       <li><%= link_to t('layouts.header.tutorial'), tutorial_path %></li>
 
       <% if user_signed_in? %>

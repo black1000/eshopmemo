@@ -19,7 +19,7 @@ body {
     align-items: center;
     max-width: 1200px; /* 最大幅を設定して中央に寄せる */
     margin: 0 auto;
-    padding: 15px 20px;
+    /* padding: 15px 20px; */
 }
 
 /* ロゴのスタイル */
@@ -63,7 +63,7 @@ body {
     margin-right: 10px;
 }
 
-/* --- メインコンテンツとレイアウト --- */
+/* --- メインコンテンツとレイアウト 
 .container.main-content {
     max-width: 1200px;
     margin: 20px auto;
@@ -71,7 +71,7 @@ body {
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-}
+}--- */
 
 .content-flex {
     display: flex;
@@ -237,4 +237,61 @@ main {
 .hamburger-menu a {
   color: white;
   text-decoration: none;
+}
+
+
+
+/* モバイル対応のためのメディアクエリ (画面幅 768px 以下)  */
+@media (max-width: 768px) {
+    /*  ヘッダーの修正 */
+
+    /* リンク全体を非表示にする（ハンバーガーメニューに格納するため） */
+    .nav-links {
+        display: none !important;
+    }
+
+    /* ログイン中ステータスはモバイルでも表示し、ヘッダーに合わせる */
+    .login-status-mobile {
+        order: 2;
+        margin-right: 10px;
+    }
+
+    /* ハンバーガーメニューを表示する（デフォルトで非表示になっている場合） */
+    .hamburger {
+        order: 3;
+        display: block; /* デフォルトで非表示設定がない場合は不要 */
+    }
+
+    /* nav-barのパディングを調整して、左右に余白を持たせる 
+    .nav-bar {
+        padding: 10px 15px;
+    } */
+
+    /* ロゴのサイズ調整 */
+    .logo-link {
+        font-size: 1.2rem;
+    }
+
+    /* --- メインコンテンツの修正（全体が左寄せになっている場合） --- */
+
+    /* メインコンテンツのコンテナのパディングを調整し、画面端との余白を確保 */
+    .container.main-content {
+        padding: 15px;
+        margin: 10px auto;
+        /* max-widthはそのまま維持 */
+    }
+
+    /* サイドバーとメモ一覧のFlexboxを解除し、縦並びにする */
+    .content-flex {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* メモ一覧とサイドバーの幅設定を解除（幅いっぱいに使う） */
+    .memo-list-area,
+    .sidebar-area {
+        flex-grow: unset;
+        min-width: unset;
+        padding-right: 0;
+    }
 }
