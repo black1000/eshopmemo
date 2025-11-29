@@ -8,7 +8,7 @@ body {
 /* ヘッダー全体 (デザインの濃い背景) */
 .app-header {
     background-color: #1e1e1e; /* デザイン画像の濃い色 */
-    padding: 0 20px;
+    padding: 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -19,7 +19,7 @@ body {
     align-items: center;
     max-width: 1200px; /* 最大幅を設定して中央に寄せる */
     margin: 0 auto;
-    padding: 15px 0;
+    padding: 15px 20px;
 }
 
 /* ロゴのスタイル */
@@ -216,7 +216,8 @@ main {
   display: none;
   position: absolute;
   top: 60px;
-  right: 10px;
+  right: 20px;
+  max-width: 1200px;
   background: #333;
   padding: 15px;
   border-radius: 8px;
