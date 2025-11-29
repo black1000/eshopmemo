@@ -6,8 +6,8 @@
       <span class="logo-link">eShopMemo</span>
     </div>
 
+    <!-- ここからログイン時限定表示 -->
     <% if user_signed_in? %>
-      <!-- 左に表示されるメニュー -->
       <div class="nav-links">
         <%= link_to t('layouts.header.new_item'), new_item_path, class: "nav-item" %>
         <%= link_to t('layouts.header.tag_list'), tags_path, class: "nav-item" %>
@@ -17,6 +17,7 @@
         </span>
       </div>
     <% end %>
+    <!-- ここまでがログインしている時だけ -->
 
     <!-- ハンバーガー -->
     <div class="hamburger" id="hamburger">
