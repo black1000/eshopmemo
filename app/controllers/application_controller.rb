@@ -11,6 +11,6 @@ class ApplicationController < ActionController::Base
 
   def after_sign_out_path_for(resource_or_scope)
     flash[:notice] = t('devise.sessions.signed_out')
-    root_path
+    unauthenticated_root_path
   end
 end
