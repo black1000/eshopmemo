@@ -234,6 +234,12 @@ en:
         text1: "You can withdraw anytime from the 'Delete Account' menu (≡)."
         text2: "All your product data, tags, and other registered information will be deleted."
 
+      pwa:
+        title: "Add to Home Screen"
+        text: "Add this to your home screen to use it like an app."
+        link: "Learn how to add to your home screen"
+
+
       back_to_items: "Back to Memo List"
       back_to_top: "Back to Top Page"
 

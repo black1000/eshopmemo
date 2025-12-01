@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "pages/contact", to:"pages#contact", as: "contact"
   get "tutorial", to: "pages#tutorial"
   get "items/reminders_by_date/:date", to: "items#reminders_by_date", as: "reminders_by_date"
+  get "pages/pwa", to: "pages#pwa"
 
     # Deviseのルーティングに、OmniAuthのコールバックコントローラを指定する設定を追加
   devise_for :users, controllers: {

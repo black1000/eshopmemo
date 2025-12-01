@@ -92,6 +92,20 @@
     </p>
   </section>
 
+  <!-- Section 7 -->
+  <section class="mb-10">
+    <h2 class="text-xl font-semibold border-l-4 border-yellow-500 pl-3 mb-3">
+      7. <%= t("pages.tutorial.pwa.title") %>
+    </h2>
+
+    <p class="leading-relaxed text-gray-700 mb-3">
+      <%= t("pages.tutorial.pwa.text") %>
+    </p>
+
+    <%= link_to t("pages.tutorial.pwa.link"),
+        pages_pwa_path,
+        class: "text-blue-600 underline" %>
+  </section>
   <% if user_signed_in? %>
     <div class="mt-12 text-center">
       <%= link_to t("pages.tutorial.back_to_items"), items_path,

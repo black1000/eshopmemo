@@ -1,0 +1,70 @@
+<div class="max-w-3xl mx-auto mt-10 px-4">
+
+  <h1 class="text-3xl font-bold mb-3">
+    <%= t("pages.tutorial.pwa.title") %>
+  </h1>
+  <p class="text-gray-500 mb-10">
+    <%= t("pages.tutorial.pwa.subtitle") %>
+  </p>
+
+  <!-- iPhone -->
+  <section class="mb-10">
+    <h2 class="text-xl font-semibold border-l-4 border-yellow-500 pl-3 mb-3">
+      1. <%= t("pages.tutorial.pwa.iphone.title") %>
+    </h2>
+
+    <p class="leading-relaxed text-gray-700">
+      <%= t("pages.tutorial.pwa.iphone.step1") %><br>
+      <%= t("pages.tutorial.pwa.iphone.step2") %><br>
+      <%= t("pages.tutorial.pwa.iphone.step3") %>
+    </p>
+  </section>
+
+  <!-- Android -->
+  <section class="mb-10">
+    <h2 class="text-xl font-semibold border-l-4 border-yellow-500 pl-3 mb-3">
+      2. <%= t("pages.tutorial.pwa.android.title") %>
+    </h2>
+
+    <p class="leading-relaxed text-gray-700">
+      <%= t("pages.tutorial.pwa.android.step1") %><br>
+      <%= t("pages.tutorial.pwa.android.step2") %><br>
+      <%= t("pages.tutorial.pwa.android.step3") %>
+    </p>
+  </section>
+
+  <!-- PC (Chrome/Edge) -->
+  <section class="mb-10">
+    <h2 class="text-xl font-semibold border-l-4 border-yellow-500 pl-3 mb-3">
+      3. <%= t("pages.tutorial.pwa.pc.title") %>
+    </h2>
+
+    <ol class="list-decimal list-inside leading-relaxed text-gray-700 space-y-2">
+      <li><%= t("pages.tutorial.pwa.pc.step1") %></li>
+      <li><%= t("pages.tutorial.pwa.pc.step2") %></li>
+      <li><%= t("pages.tutorial.pwa.pc.step3") %></li>
+      <li><%= t("pages.tutorial.pwa.pc.step4") %></li>
+      <li><%= t("pages.tutorial.pwa.pc.step5") %></li>
+    </ol>
+  </section>
+
+  <!-- Notes -->
+  <section class="mb-10">
+    <h2 class="text-xl font-semibold border-l-4 border-yellow-500 pl-3 mb-3">
+      4. <%= t("pages.tutorial.pwa.notes.title") %>
+    </h2>
+
+    <ul class="list-disc list-inside leading-relaxed text-gray-700 space-y-2">
+      <li><%= t("pages.tutorial.pwa.notes.note1") %></li>
+      <li><%= t("pages.tutorial.pwa.notes.note2") %></li>
+      <li><%= t("pages.tutorial.pwa.notes.note3") %></li>
+      <li><%= t("pages.tutorial.pwa.notes.note4") %></li>
+    </ul>
+  </section>
+
+  <div class="mt-12 text-center">
+    <%= link_to t("pages.tutorial.back_to_tutorial"), tutorial_path,
+      class: "inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-lg shadow" %>
+  </div>
+
+</div>
