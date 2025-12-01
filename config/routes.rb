@@ -29,8 +29,14 @@ Rails.application.routes.draw do
 
   get 'tags', to: 'items#tags', as: :tags
   
+  authenticated :user do
+    root "items#index", as: :authenticated_root
+  end
+
   # トップページ
-  root "top#index"
+  unauthenticated do
+    root "top#index", as: :unauthenticated_root
+  end
 
   get "up" => "rails/health#show", as: :rails_health_check
 

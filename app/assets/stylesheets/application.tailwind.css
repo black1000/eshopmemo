@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* PC のときはハンバーガーメニュー内の「商品追加」「タグ一覧」を消す */
+@media (min-width: 1024px) {
+  #hamburger-menu li.hide-on-desktop {
+    display: none;
+  }
+}
