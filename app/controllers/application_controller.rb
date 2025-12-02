@@ -1,10 +1,7 @@
 class ApplicationController < ActionController::Base
-
   allow_browser versions: :modern
 
-  # キャッシュ防止
   before_action :prevent_cache
-
   before_action :set_locale
 
   def prevent_cache
@@ -17,11 +14,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
+    I18n.locale = params[:locale] || session[:locale] || I18n.default_locale
+    session[:locale] = I18n.locale
   end
 
   def default_url_options
-    I18n.locale == I18n.default_locale ? {} : { locale: I18n.locale }
+    { locale: I18n.locale }.merge(super)
   end
-
 end
