@@ -235,13 +235,42 @@ en:
         text2: "All your product data, tags, and other registered information will be deleted."
 
       pwa:
-        title: "Add to Home Screen"
-        text: "Add this to your home screen to use it like an app."
-        link: "Learn how to add to your home screen"
+        title: "How to Add to Home Screen"
+        subtitle: "You can launch eShopMemo from your home screen like an app."
+        text: "Once added to the home screen, you can use it just like a regular app."
+        link: "Click here to learn how to add it to your home screen"
 
+        iphone:
+          title: "How to Add on iPhone (Safari)"
+          step1: "Tap the Share button (□↑) at the bottom of the screen."
+          step2: "Select “Add to Home Screen”."
+          step3: "Confirm the name and tap “Add”."
 
+        android:
+          title: "How to Add on Android (Chrome)"
+          step1: "Tap the menu button (︙) at the top right."
+          step2: "Select “Add to Home Screen” or “Install”."
+          step3: "Confirm the name and continue to add."
+
+        pc:
+          title: "How to Install on PC (Chrome / Edge)"
+          step1: "Open the supported page in Chrome or Edge."
+          step2: "If available, an “Install” icon will appear on the right side of the address bar."
+          step3: "If the icon doesn’t appear, use the menu instead."
+          step4: "Chrome: Menu (︙) → “Install app”."
+          step5: "Edge: Menu (…) → “Apps” → “Install this site as an app”."
+
+        notes:
+          title: "Notes"
+          note1: "Displayed options may vary depending on browser and version."
+          note2: "It may take some time for caching to become active."
+          note3: "If the URL structure changes, the cache may reload."
+          note4: "For PC installation, Chrome or Edge is recommended."
+
+      back_to_tutorial: "Back to Guide"
       back_to_items: "Back to Memo List"
-      back_to_top: "Back to Top Page"
+      back_to_top: "Back to Top"
+
 
   activerecord:
     models:
@@ -300,3 +329,5 @@ en:
     sessions:
       signed_out: "Logged out"
 
+  language:
+    switch: "🌐 日本語"

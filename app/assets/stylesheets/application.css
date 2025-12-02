@@ -57,6 +57,15 @@ body {
     color: #ffffff;
 }
 
+.user-info {
+    color: #c0c0c0;
+    margin-left: 20px; /* nav-item と揃える */
+    padding: 8px 12px;
+    border-radius: 5px;
+    white-space: nowrap;
+    cursor: default;
+}
+
 /* ログイン中のステータス表示 */
 .user-info {
     color: #4CAF50; /* ログイン中であることを示す色 */
@@ -206,6 +215,7 @@ main {
     color: #aaaaaa;
 }
 
+
 .hamburger {
   cursor: pointer;
   font-size: 26px;
@@ -223,6 +233,8 @@ main {
   background: #333;
   padding: 15px;
   border-radius: 8px;
+  width: 200px;
+  max-width: 80vw;
   z-index: 1000;
 }
 
@@ -240,6 +252,35 @@ main {
   color: white;
   text-decoration: none;
 }
+
+.hamburger-menu li a {
+    display: block;
+    padding: 10 px 16px;
+    font-size: 0.95rem;
+}
+
+.hamburger-menu li a:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.language-switch {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+
+.language-switch a {
+  display: block;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.language-switch a:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
 
 
 
