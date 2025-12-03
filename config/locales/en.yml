@@ -234,6 +234,12 @@ en:
         text1: "You can withdraw anytime from the 'Delete Account' menu (≡)."
         text2: "All your product data, tags, and other registered information will be deleted."
 
+      language:
+        title: Language Settings
+        text1: You can switch the display language from the menu icon (≡) located in the top-right corner.
+        text2: You can choose between English and Japanese. Changes apply immediately.
+        notice: '*Please note: Some screens may take a few seconds to update after switching languages.*'
+
       pwa:
         title: "How to Add to Home Screen"
         subtitle: "You can launch eShopMemo from your home screen like an app."
