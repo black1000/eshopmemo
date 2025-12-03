@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-
   def destroy
     resource.destroy
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
 
-    flash[:notice] = t('devise.registrations.destroyed')
+    flash[:notice] = t("devise.registrations.destroyed")
     redirect_to root_path
   end
 

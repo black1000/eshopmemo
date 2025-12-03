@@ -3,8 +3,8 @@ require "open-uri"
 require "nokogiri"
 
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [ :index ]
+  before_action :set_item, only: [ :show, :edit, :update, :destroy ]
 
 
   def index
@@ -31,8 +31,8 @@ class ItemsController < ApplicationController
 
     @tags = current_user.tags
                     .left_joins(:items)
-                    .group('tags.id')
-                    .having('COUNT(items.id) > 0')
+                    .group("tags.id")
+                    .having("COUNT(items.id) > 0")
                     .order(:name)
   end
 
@@ -46,7 +46,7 @@ class ItemsController < ApplicationController
     @item = current_user.items.build(item_params)
     downloaded_image = nil
 
-      # 新規タグ作成
+    # 新規タグ作成
     if params[:item][:new_tag].present?
       new_tag = current_user.tags.find_or_create_by(name: params[:item][:new_tag])
       @item.tag = new_tag
@@ -55,7 +55,7 @@ class ItemsController < ApplicationController
     if params[:new_tag_name].present?
   tag = current_user.tags.find_or_create_by(name: params[:new_tag_name])
   @item.tag = tag
-end
+    end
 
     begin
       page = MetaInspector.new(@item.url, allow_redirections: :all)
@@ -100,12 +100,12 @@ end
           content_type: downloaded_image.content_type || "image/jpeg"
         )
       else
-        Rails.logger.warn t('items.create.image_not_found_log', url: @item.url)
+        Rails.logger.warn t("items.create.image_not_found_log", url: @item.url)
       end
 
     rescue => e
-      Rails.logger.error t('items.create.image_fetch_failed_log', message: e.message)
-      flash[:alert] = t('items.create.image_fetch_failed')
+      Rails.logger.error t("items.create.image_fetch_failed_log", message: e.message)
+      flash[:alert] = t("items.create.image_fetch_failed")
     end
 
     if @item.save
@@ -118,15 +118,15 @@ end
     )
   end
 
-  redirect_to items_path, notice: t('items.create.success')
-else
+  redirect_to items_path, notice: t("items.create.success")
+    else
   render :new
-end
+    end
   end
 
   def show
   @item = current_user.items.find(params[:id])
-  
+
   @reminder = @item.reminder
 end
 
@@ -137,16 +137,16 @@ end
 
 
   def update
-  update_params = item_params 
+  update_params = item_params
 
-  if @item.update(update_params) 
+  if @item.update(update_params)
 
     @item.reload
-    @item.reminder&.reload 
+    @item.reminder&.reload
 
-    redirect_to @item, notice: t('items.update.success')
+    redirect_to @item, notice: t("items.update.success")
   else
-    flash.now[:alert] = t('items.update.fail')
+    flash.now[:alert] = t("items.update.fail")
     render :edit, status: :unprocessable_entity
   end
 end
@@ -160,7 +160,7 @@ end
       tag.destroy
     end
 
-    redirect_to items_path, notice: t('items.destroy.success')
+    redirect_to items_path, notice: t("items.destroy.success")
   end
 
 
@@ -177,8 +177,8 @@ end
     # 商品が1件以上あるタグのみ表示
     @tags = current_user.tags
                         .left_joins(:items)
-                        .group('tags.id')
-                        .having('COUNT(items.id) > 0')
+                        .group("tags.id")
+                        .having("COUNT(items.id) > 0")
                         .order(:name)
 
     render :tag
@@ -189,13 +189,12 @@ end
     if current_user
       @tags = current_user.tags
                           .left_joins(:items)
-                          .group('tags.id')
-                          .having('COUNT(items.id) > 0')
+                          .group("tags.id")
+                          .having("COUNT(items.id) > 0")
                           .order(:name)
     else
       @tags = [] # 非ログインなら空配列を返す
     end
-    
   end
 
 
@@ -208,7 +207,7 @@ def create_reminder
   @reminder = current_user.reminders.build(reminder_params.merge(item: @item))
 
   if @reminder.save
-    redirect_to @item, notice: t('reminders.create.success')
+    redirect_to @item, notice: t("reminders.create.success")
   else
     flash[:alert] = "リマインダーの登録に失敗しました"
     redirect_to @item
@@ -247,7 +246,7 @@ private
 def item_params # item に必要なカラムだけを許可して取得
   whitelisted = params.require(:item).permit(
     :url, :title, :image_url, :memo, :image, :tag_id,
-    reminder_attributes: [:id, :scheduled_date, :memo, :_destroy, :user_id] 
+    reminder_attributes: [ :id, :scheduled_date, :memo, :_destroy, :user_id ]
   )
 
   if whitelisted[:reminder_attributes].present?
@@ -260,7 +259,6 @@ def item_params # item に必要なカラムだけを許可して取得
     end
   end
 
-  whitelisted #最終的な permit 済みパラメータを返す
+  whitelisted # 最終的な permit 済みパラメータを返す
 end
-
 end

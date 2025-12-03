@@ -24,45 +24,44 @@ gem "metainspector"
 
 
 # ユーザー認証
-gem 'devise'
+gem "devise"
 
 # OmniAuthのコアライブラリ
-gem 'omniauth'
+gem "omniauth"
 
 # Googleアカウントで認証するためのアダプタ
-gem 'omniauth-google-oauth2'
+gem "omniauth-google-oauth2"
 
 # CSRF攻撃からコールバック処理を保護するためのセキュリティ対策
-gem 'omniauth-rails_csrf_protection'
+gem "omniauth-rails_csrf_protection"
 
 # ファイルストレージ
-gem 'cloudinary'
+gem "cloudinary"
 
 # 外部URLのHTMLや画像データを取得（ダウンロード）するための標準ライブラリ
 # gem 'open-uri'
 
 # スタイルシート
-gem 'tailwindcss-rails'
+gem "tailwindcss-rails"
 
 # ページネーション
-gem 'kaminari'
-gem 'kaminari-i18n'
+gem "kaminari"
+gem "kaminari-i18n"
 
 # HTMLパーサー
-gem 'nokogiri'
+gem "nokogiri"
 
-gem 'faraday'
+gem "faraday"
 
 # カレンダー処理
-gem 'icalendar'
+gem "icalendar"
 
 # 環境変数
-gem 'dotenv-rails'
+gem "dotenv-rails"
 
 group :development, :test do
   # 開発環境でのメール確認用
-  gem 'letter_opener'
-
+  gem "letter_opener"
 end
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]

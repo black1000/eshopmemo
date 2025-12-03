@@ -6,7 +6,7 @@ has_many :reminders, dependent: :destroy
   # :omniauthable に :omniauth_providers を指定してGoogleログイン対応
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: [:google_oauth2]
+         :omniauthable, omniauth_providers: [ :google_oauth2 ]
 
   # GoogleからのOAuth情報をもとにユーザーを取得・作成
   def self.from_omniauth(auth)

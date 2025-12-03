@@ -1,24 +1,24 @@
 Rails.application.routes.draw do
   get "pages/terms", to: "pages#terms", as: "terms"
   get "pages/privacy", to: "pages#privacy", as: "privacy"
-  get "pages/contact", to:"pages#contact", as: "contact"
+  get "pages/contact", to: "pages#contact", as: "contact"
   get "tutorial", to: "pages#tutorial"
   get "items/reminders_by_date/:date", to: "items#reminders_by_date", as: "reminders_by_date"
   get "pages/pwa", to: "pages#pwa"
 
-    # Deviseのルーティングに、OmniAuthのコールバックコントローラを指定する設定を追加
+  # Deviseのルーティングに、OmniAuthのコールバックコントローラを指定する設定を追加
   devise_for :users, controllers: {
-    omniauth_callbacks: 'users/omniauth_callbacks',
+    omniauth_callbacks: "users/omniauth_callbacks",
     registrations: "users/registrations"
   }
 
-  get 'tag/:id', to: 'items#tag', as: :tag_items
+  get "tag/:id", to: "items#tag", as: :tag_items
 
   # 商品関連のルーティング
   resources :items do
     collection do
-      get :reminders   
-      get :memos_on_date  
+      get :reminders
+      get :memos_on_date
       get :edit_multiple   # 複数商品の編集フォーム表示
       patch :update_multiple  # 複数商品の更新処理
     end
@@ -28,8 +28,8 @@ Rails.application.routes.draw do
   end
   end
 
-  get 'tags', to: 'items#tags', as: :tags
-  
+  get "tags", to: "items#tags", as: :tags
+
   authenticated :user do
     root "items#index", as: :authenticated_root
   end
@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   [
     200,
     { "Content-Type" => "application/javascript" },
-    [File.read(Rails.root.join("public", "service-worker.js"))]
+    [ File.read(Rails.root.join("public", "service-worker.js")) ]
   ]
 }
 end

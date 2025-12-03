@@ -22,7 +22,7 @@ Rails.application.configure do
   # config.asset_host = "http://assets.example.com"
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  
+
   # 修正前: config.active_storage.service = :local
   # 修正後:
   config.active_storage.service = :cloudinary
@@ -53,8 +53,8 @@ Rails.application.configure do
   config.cache_store = :solid_cache_store
 
   # Replace the default in-process and non-durable queuing backend for Active Job.
-  #config.active_job.queue_adapter = :solid_queue
-  #config.solid_queue.connects_to = { database: { writing: :queue } }
+  # config.active_job.queue_adapter = :solid_queue
+  # config.solid_queue.connects_to = { database: { writing: :queue } }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -67,9 +67,9 @@ Rails.application.configure do
   config.active_storage.queues.purge = :inline
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { 
-    host: 'eshopmemo.onrender.com',
-    protocol: 'https'
+  config.action_mailer.default_url_options = {
+    host: "eshopmemo.onrender.com",
+    protocol: "https"
   }
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
