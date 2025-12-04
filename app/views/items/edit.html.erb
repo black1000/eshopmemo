@@ -79,9 +79,9 @@
   <label class="block text-sm font-medium text-gray-700 mb-1">
     <%= t('items.edit.new_tag') %>
   </label>
-  <input type="text" name="new_tag_name"
-         class="w-full border-gray-300 rounded-md shadow-sm"
-         placeholder=<% t('items.edit.new.tag.title')%> >
+  <%= f.text_field :new_tag,
+      class: "w-full border-gray-300 rounded-md shadow-sm",
+      placeholder: t('items.edit.new_tag_title') %>
   <p class="text-xs text-gray-500 mt-1">
     <%= t('items.edit.tag_text') %>
   </p>

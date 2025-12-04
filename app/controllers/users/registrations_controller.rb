@@ -6,13 +6,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
 
     flash[:notice] = t("devise.registrations.destroyed")
-    redirect_to root_path
+    redirect_to unauthenticated_root_path
   end
 
     protected
 
   def after_sign_out_path_for(resource_or_scope)
-    root_path
+    unauthenticated_root_path
   end
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]

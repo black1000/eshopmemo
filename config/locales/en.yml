@@ -69,6 +69,7 @@ en:
       plan_list: "Scheduled List"
       no_items: "No products registered yet."
       calendar: "Calendar"
+      no_events: "No events have been added yet."
       weekdays:
         - "Sun"
         - "Mon"
@@ -337,3 +338,8 @@ en:
 
   language:
     switch: "🌐 日本語"
+
+  reminders:
+    create:
+      success: "Reminder saved successfully."
+      failure: "Failed to save the reminder."

@@ -139,6 +139,13 @@ end
   def update
   update_params = item_params
 
+  if params[:item][:new_tag].present?
+    new_tag = current_user.tags.find_or_create_by(name: params[:item][:new_tag])
+    update_params[:tag_id] = new_tag.id
+  end
+
+  update_params.delete(:new_tag)
+
   if @item.update(update_params)
 
     @item.reload
@@ -209,7 +216,7 @@ def create_reminder
   if @reminder.save
     redirect_to @item, notice: t("reminders.create.success")
   else
-    flash[:alert] = "リマインダーの登録に失敗しました"
+    flash[:alert] = t("reminders.create.failure")
     redirect_to @item
   end
 end
@@ -245,7 +252,7 @@ private
 
 def item_params # item に必要なカラムだけを許可して取得
   whitelisted = params.require(:item).permit(
-    :url, :title, :image_url, :memo, :image, :tag_id,
+    :url, :title, :image_url, :memo, :image, :tag_id, :new_tag,
     reminder_attributes: [ :id, :scheduled_date, :memo, :_destroy, :user_id ]
   )
 
