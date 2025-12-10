@@ -60,7 +60,9 @@ gem "icalendar"
 gem "dotenv-rails"
 
 group :development, :test do
-  # 開発環境でのメール確認用
+  gem "rspec-rails", "~> 8.0"
+  gem "factory_bot_rails"
+  gem "faker"
   gem "letter_opener"
 end
 
@@ -104,12 +106,7 @@ group :development do
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-
-  gem "factory_bot_rails"
   gem "shoulda-matchers", "~> 5.0"
 end
-
-gem "rspec-rails", "~> 8.0"
