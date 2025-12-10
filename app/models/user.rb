@@ -8,6 +8,12 @@ has_many :reminders, dependent: :destroy
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [ :google_oauth2 ]
 
+  validates :provider, :uid, presence: true, if: :omniauth_user?
+
+def omniauth_user?
+  provider.present? || uid.present?
+end
+
   # GoogleからのOAuth情報をもとにユーザーを取得・作成
   def self.from_omniauth(auth)
     # provider と uid で既存ユーザーを探す

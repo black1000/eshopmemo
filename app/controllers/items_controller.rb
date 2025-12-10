@@ -3,9 +3,9 @@ require "open-uri"
 require "nokogiri"
 
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, except: [ :index ]
+  #before_action :authenticate_user!, except: [ :index ]
   before_action :set_item, only: [ :show, :edit, :update, :destroy ]
-
+  before_action :authenticate_user!
 
   def index
     if current_user
@@ -43,19 +43,16 @@ class ItemsController < ApplicationController
 
 
   def create
-    @item = current_user.items.build(item_params)
     downloaded_image = nil
 
     # 新規タグ作成
-    if params[:item][:new_tag].present?
-      new_tag = current_user.tags.find_or_create_by(name: params[:item][:new_tag])
-      @item.tag = new_tag
-    end
+    permitted = item_params
+    tag_name = permitted.delete(:tag_name)
+    @item = current_user.items.build(permitted)
 
-    if params[:new_tag_name].present?
-  tag = current_user.tags.find_or_create_by(name: params[:new_tag_name])
-  @item.tag = tag
-    end
+     if tag_name.present?
+      @item.tag = current_user.tags.find_or_create_by!(name: tag_name)
+     end
 
     begin
       page = MetaInspector.new(@item.url, allow_redirections: :all)
@@ -139,12 +136,12 @@ end
   def update
   update_params = item_params
 
-  if params[:item][:new_tag].present?
-    new_tag = current_user.tags.find_or_create_by(name: params[:item][:new_tag])
-    update_params[:tag_id] = new_tag.id
-  end
+  tag_name = update_params.delete(:tag_name)
 
-  update_params.delete(:new_tag)
+  if tag_name.present?
+  tag = current_user.tags.find_or_create_by!(name: tag_name)
+  update_params[:tag_id] = tag.id
+end
 
   if @item.update(update_params)
 
@@ -252,19 +249,20 @@ private
 
 def item_params # item に必要なカラムだけを許可して取得
   whitelisted = params.require(:item).permit(
-    :url, :title, :image_url, :memo, :image, :tag_id, :new_tag,
+    :url, :title, :image_url, :memo, :image, :tag_id, :tag_name,
     reminder_attributes: [ :id, :scheduled_date, :memo, :_destroy, :user_id ]
   )
 
   if whitelisted[:reminder_attributes].present?
-    reminder_attrs = whitelisted[:reminder_attributes]
+  ra = whitelisted[:reminder_attributes]
 
-    # Reminderが新規作成時（idが空）、または user_idが設定されていない場合
-    if reminder_attrs[:id].blank? || reminder_attrs[:user_id].blank?
-       # user_idをcurrent_user.idで上書き
-       whitelisted[:reminder_attributes] = reminder_attrs.merge(user_id: current_user.id)
-    end
+  # 日付/メモが空ならネスト自体を捨てる
+  if ra[:scheduled_date].blank? && ra[:memo].blank? && ra[:_destroy].blank?
+    whitelisted.delete(:reminder_attributes)
+  else
+    whitelisted[:reminder_attributes] = ra.merge(user_id: current_user.id)
   end
+end
 
   whitelisted # 最終的な permit 済みパラメータを返す
 end

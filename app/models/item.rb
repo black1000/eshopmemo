@@ -8,7 +8,12 @@ class Item < ApplicationRecord
 
 
   has_one :reminder, dependent: :destroy
-  accepts_nested_attributes_for :reminder, allow_destroy: true
+  accepts_nested_attributes_for :reminder,
+    allow_destroy: true,
+    reject_if: ->(attrs) {
+      # user_id が勝手に入っても、日付もメモも空なら作らない
+      attrs["_destroy"] != "1" && attrs["scheduled_date"].blank? && attrs["memo"].blank?
+    }
 
   # Active Storage で画像ファイルを添付
   has_one_attached :image, dependent: :purge_later
