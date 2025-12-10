@@ -87,9 +87,25 @@
     <%= t('items.index.calendar')%>
   </h2>
 
+  <!-- 月移動 -->
+  <div class="flex items-center justify-between">
+  <%= link_to t("items.index.prev_month"),
+      url_for(month: @month.prev_month.strftime("%Y-%m")),
+      class: "px-3 py-2 rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200 active:scale-95 transition",
+      aria: { label: t("items.index.prev_month") } %>
+
+  <div class="font-bold"><%= @month.strftime(I18n.t("items.index.year_month")) %></div>
+
+  <%= link_to t("items.index.next_month"),
+      url_for(month: @month.next_month.strftime("%Y-%m")),
+      class: "px-3 py-2 rounded-md bg-gray-100 text-gray-800 hover:bg-gray-200 active:scale-95 transition",
+      aria: { label: t("items.index.next_month") } %>
+  </div>
+
+
   <% today = Date.current %>
-  <% first_day = today.beginning_of_month %>
-  <% last_day = today.end_of_month %>
+  <% first_day = @month.beginning_of_month %>
+  <% last_day  = @month.end_of_month %>
 
   <table class="w-full border-collapse text-sm table-fixed bg-white rounded-lg shadow overflow-visible">
     <thead>
@@ -111,8 +127,8 @@
             <% reminders = @reminder_days[current] || [] %>
 
             <td class="relative h-14 border align-top p-1
-  <%= 'bg-green-200 font-bold' if current == today %>
-  <%= 'text-gray-400' if current.month != today.month %>">
+              <%= 'bg-green-200 font-bold' if current == today %>
+              <%= 'text-gray-400' if current.month != @month.month %>">
 
   <%= link_to reminders_by_date_path(date: current), class: "absolute inset-0 block p-1" do %>
 

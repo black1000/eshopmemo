@@ -78,6 +78,9 @@ en:
         - "Thu"
         - "Fri"
         - "Sat"
+      year_month: "%b %Y"
+      prev_month: "Prev"
+      next_month: "Next"
 
     show:
       no_title: "No title"

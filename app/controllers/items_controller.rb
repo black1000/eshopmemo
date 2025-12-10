@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
   #before_action :authenticate_user!, except: [ :index ]
   before_action :set_item, only: [ :show, :edit, :update, :destroy ]
   before_action :authenticate_user!
+  before_action :set_month, only: %i[index reminders]
 
   def index
     if current_user
@@ -13,7 +14,7 @@ class ItemsController < ApplicationController
       @items = current_user.items.order(created_at: :desc)
 
       # カレンダー用
-      today = Date.current
+      today = @month
       start_date = today.beginning_of_month
       end_date = today.end_of_month
 
@@ -219,12 +220,28 @@ def create_reminder
 end
 
 def reminders
+  # 表示する月を決定（パラメータがあればその月、なければ今月）
+  @month = if params[:month].present?
+             Date.strptime(params[:month], "%Y-%m")
+           else
+             Date.current
+           end
+
+  start_date = @month.beginning_of_month
+  end_date   = @month.end_of_month
+
+  # 予定一覧用（一覧テーブル・リスト用）
   @reminders = current_user.reminders
                            .includes(:item)
                            .order(scheduled_date: :asc)
                            .page(params[:page]).per(8)
 
-  @reminder_days = @reminders.group_by(&:scheduled_date)
+  # カレンダー用（その月の全予定）
+  month_reminders = current_user.reminders
+                                .where(scheduled_date: start_date..end_date)
+                                .includes(:item)
+
+  @reminder_days = month_reminders.group_by(&:scheduled_date)
 end
 
 
@@ -240,6 +257,17 @@ end
 
 
 private
+
+def set_month
+  @month =
+    if params[:month].present?
+      Date.strptime(params[:month], "%Y-%m")
+    else
+      Date.current
+    end
+rescue ArgumentError
+  @month = Date.current
+end
 
 
   def set_item
