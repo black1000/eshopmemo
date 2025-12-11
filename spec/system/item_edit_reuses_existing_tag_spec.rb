@@ -2,7 +2,6 @@ require "rails_helper"
 
 RSpec.describe "ItemEditReusesExistingTag", type: :system do
   it "編集で新規タグ名に既存タグ名を入れると、新規作成せず既存タグを再利用する" do
-
     visit "/"
     page.driver.submit :post, "/users/auth/google_oauth2", {}
     expect(page).to have_current_path("/items", ignore_query: true)

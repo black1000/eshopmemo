@@ -2,7 +2,6 @@ require "rails_helper"
 
 RSpec.describe "ItemEditNewTagAppearsInSelect", type: :system do
   it "編集で新規作成したタグが、次回編集画面のプルダウンに表示される" do
-
     visit "/"
     page.driver.submit :post, "/users/auth/google_oauth2", {}
     expect(page).to have_current_path("/items", ignore_query: true)
@@ -20,6 +19,6 @@ RSpec.describe "ItemEditNewTagAppearsInSelect", type: :system do
 
     # 2回目の編集：プルダウンに新規タグが出ていること
     visit "/items/#{item.id}/edit"
-    expect(page).to have_select("item[tag_id]", with_options: ["新規タグX"])
+    expect(page).to have_select("item[tag_id]", with_options: [ "新規タグX" ])
   end
 end

@@ -11,11 +11,9 @@ RSpec.describe "ItemEditCreatesTag", type: :system do
 
     visit "/items/#{item.id}/edit"
 
-    # 先に input を掴む（これが一番大事）
     tag_input = find("#item_tag_name", visible: :all)
     tag_input.set("新タグ")
 
-    # input が属する form を辿って、その中の submit を押す
     form = tag_input.find(:xpath, "ancestor::form[1]")
     within("form") do
         find('input[name="item[tag_name]"]', visible: :all).set("新タグ")
@@ -30,4 +28,3 @@ RSpec.describe "ItemEditCreatesTag", type: :system do
     expect(Tag.where(user: user, name: "新タグ").count).to eq(1)
   end
 end
-

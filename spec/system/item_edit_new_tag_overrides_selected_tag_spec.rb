@@ -2,7 +2,6 @@ require "rails_helper"
 
 RSpec.describe "ItemEditNewTagOverridesSelectedTag", type: :system do
   it "既存タグを選んでいても、新規タグ名を入力したら新規タグが紐づく" do
-
     visit "/"
     page.driver.submit :post, "/users/auth/google_oauth2", {}
     expect(page).to have_current_path("/items", ignore_query: true)

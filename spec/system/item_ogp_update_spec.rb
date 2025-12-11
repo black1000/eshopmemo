@@ -17,7 +17,6 @@ RSpec.describe "ItemOgpUpdate", type: :system do
   find('input[type="submit"], button[type="submit"]', match: :first).click
 end
 
-    # ここで「実際に遷移したshowのID」を確定させる
     expect(page).to have_current_path(%r{\A/items/\d+\z}, ignore_query: true)
     shown_id = page.current_path.split("/").last.to_i
 

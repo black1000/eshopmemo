@@ -2,7 +2,6 @@ require "rails_helper"
 
 RSpec.describe "ItemEditClearsTag", type: :system do
   it "編集ページでタグを未選択にすると item のタグが外れる" do
-
     visit "/"
     page.driver.submit :post, "/users/auth/google_oauth2", {}
     expect(page).to have_current_path("/items", ignore_query: true)

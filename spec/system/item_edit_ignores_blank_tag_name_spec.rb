@@ -2,7 +2,6 @@ require "rails_helper"
 
 RSpec.describe "ItemEditIgnoresBlankTagName", type: :system do
   it "編集で新規タグ名が空白だけの場合は無視され、タグは増えず紐づきも変わらない" do
-
     visit "/"
     page.driver.submit :post, "/users/auth/google_oauth2", {}
     expect(page).to have_current_path("/items", ignore_query: true)
@@ -17,7 +16,6 @@ RSpec.describe "ItemEditIgnoresBlankTagName", type: :system do
     visit "/items/#{item.id}/edit"
 
     within("form") do
-
       find('input[name="item[tag_name]"]').set("   ")
       find('input[type="submit"], button[type="submit"]', match: :first).click
     end

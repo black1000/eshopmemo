@@ -15,7 +15,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  config.fixture_paths = [Rails.root.join('spec/fixtures')]
+  config.fixture_paths = [ Rails.root.join('spec/fixtures') ]
   config.use_transactional_fixtures = true
 
   config.include FactoryBot::Syntax::Methods
@@ -31,9 +31,9 @@ RSpec.configure do |config|
   OmniAuth.config.test_mode = true
 
   config.include Rails.application.routes.url_helpers, type: :system
-  
+
   config.include Warden::Test::Helpers
-  
+
   config.include SystemLoginHelper, type: :system
 
   config.after(:each, type: :system) do

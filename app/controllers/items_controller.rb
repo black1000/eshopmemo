@@ -3,7 +3,7 @@ require "open-uri"
 require "nokogiri"
 
 class ItemsController < ApplicationController
-  #before_action :authenticate_user!, except: [ :index ]
+  # before_action :authenticate_user!, except: [ :index ]
   before_action :set_item, only: [ :show, :edit, :update, :destroy ]
   before_action :authenticate_user!
   before_action :set_month, only: %i[index reminders]
@@ -142,7 +142,7 @@ end
   if tag_name.present?
   tag = current_user.tags.find_or_create_by!(name: tag_name)
   update_params[:tag_id] = tag.id
-end
+  end
 
   if @item.update(update_params)
 
@@ -223,9 +223,9 @@ def reminders
   # 表示する月を決定（パラメータがあればその月、なければ今月）
   @month = if params[:month].present?
              Date.strptime(params[:month], "%Y-%m")
-           else
+  else
              Date.current
-           end
+  end
 
   start_date = @month.beginning_of_month
   end_date   = @month.end_of_month
@@ -290,7 +290,7 @@ def item_params # item に必要なカラムだけを許可して取得
   else
     whitelisted[:reminder_attributes] = ra.merge(user_id: current_user.id)
   end
-end
+  end
 
   whitelisted # 最終的な permit 済みパラメータを返す
 end
