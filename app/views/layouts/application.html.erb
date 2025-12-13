@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
     <title>eShopMemo</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -21,6 +21,18 @@
     <link rel="icon" type="image/png" sizes="48x48" href="/icons/favicon-48.png">
 
     <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DNNNNHWQ96"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    // Turbo等で二重計測を防ぐため、まず自動PVをOFFにしておくのが安全
+    gtag('config', 'G-DNNNNHWQ96', { send_page_view: false });
+  </script>
+
   </head>
 
   <body>
@@ -37,5 +49,14 @@
       <%= yield %>
     </main>
     <%= render 'layouts/footer' %>
+
+    <% if flash[:ga_event].present? %>
+      <script>
+        document.addEventListener("turbo:load", () => {
+          const ev = <%= raw flash[:ga_event].to_json %>;
+          if (window.trackEvent) window.trackEvent(ev.name, ev.params || {});
+        });
+      </script>
+    <% end %>
   </body>
 </html>
