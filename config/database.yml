@@ -12,10 +12,7 @@ development:
 
 test:
   <<: *default
-  database: shopmemo_test
-  username: <%= ENV["DATABASE_USERNAME"] %>
-  password: <%= ENV["DATABASE_PASSWORD"] %>
-  host: <%= ENV["DATABASE_HOST"] %>
+  url: <%= ENV["DATABASE_URL"] %>
 
 production: &production
   <<: *default
