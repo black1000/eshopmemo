@@ -36,7 +36,7 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
       - run: bundle exec rubocop -f github
-      
+
   test:
     runs-on: ubuntu-latest
     env:
@@ -45,6 +45,8 @@ jobs:
       CLOUDINARY_CLOUD_NAME: dummy
       CLOUDINARY_API_KEY: dummy
       CLOUDINARY_API_SECRET: dummy
+      GOOGLE_CLIENT_ID: dummy
+      GOOGLE_CLIENT_SECRET: dummy
 
     services:
       postgres:
@@ -67,6 +69,9 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
+
+      - name: Build Tailwind CSS
+        run: bundle exec rails tailwindcss:build
 
       - name: Prepare DB
         run: bundle exec rails db:prepare
