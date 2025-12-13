@@ -3,7 +3,6 @@ services:
     image: postgres:14
     container_name: shopmemo-db
     restart: always
-    # DB接続情報は.env.developmentから取得するように修正済み
     environment:
       POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
