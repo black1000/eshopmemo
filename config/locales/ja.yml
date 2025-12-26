@@ -306,6 +306,7 @@ ja:
     omniauth_callbacks:
       google_oauth2:
         success: "Googleでログインしました"
+        failure: "Googleログインがキャンセルされました"
 
     registrations:
       destroyed: "アカウントを削除しました。ご利用ありがとうございました。"

@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
+  devise_scope :user do
+    get "/users/auth/failure", to: "users/omniauth_callbacks#failure"
+  end
+
   get "tag/:id", to: "items#tag", as: :tag_items
 
   # 商品関連のルーティング

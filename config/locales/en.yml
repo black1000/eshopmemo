@@ -332,6 +332,7 @@ en:
     omniauth_callbacks:
       google_oauth2:
         success: "Logged in with Google"
+        failure: "Google login was cancelled"
 
     registrations:
       destroyed: "Account deleted. Thank you for using our service."

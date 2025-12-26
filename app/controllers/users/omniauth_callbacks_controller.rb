@@ -1,6 +1,14 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
-    @user = User.from_omniauth(request.env["omniauth.auth"])
+    auth = request.env["omniauth.auth"]
+
+  if auth.blank?
+    redirect_to unauthenticated_root_path, 
+    alert: t("devise.omniauth_callbacks.google_oauth2.failure")
+    return
+  end
+
+    @user = User.from_omniauth(auth)
 
     if @user.persisted?
       flash[:notice] = t("devise.omniauth_callbacks.google_oauth2.success")
@@ -13,7 +21,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
-    redirect_to root_path
+    redirect_to unauthenticated_root_path,
+    alert: t("devise.omniauth_callbacks.google_oauth2.failure")
   end
 
 
