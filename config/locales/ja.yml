@@ -76,7 +76,7 @@ ja:
       title: "メモ追加"
       submit: "追加する"
       item_url: "商品URL"
-      url_text: "商品ページのURLを入力"
+      url_text: "https:// から始まる商品ページURLを入力（共有文を貼る場合はURLだけ残してください）"
       item_title: "タイトル"
       item_text: "商品タイトルを入力"
       image: "商品画像"
@@ -186,6 +186,11 @@ ja:
         text1: "気になる商品のURLを入力すると、自動で商品名と画像を取得します。"
         text2: "「ほしい理由」や「メモ」も自由に追加できます。"
         notice_html: "※ Amazonや一部のブランド公式サイトでは、<strong class='font-semibold'>セキュリティ設定</strong> により画像を自動取得できない場合があります。<br>その際は、<span class='font-semibold text-yellow-600'>商品編集ページから手動で画像を追加</span>できます。"
+        url_notice_html: >
+          <strong class='font-semibold'>URLの入力について</strong><br>
+          URL欄には <span class='font-semibold'>https://</span> から始まるURLを入力してください。<br>
+          楽天・Amazonアプリの共有文（商品名+URL）を貼った場合は、URL部分だけを残してください。<br>
+          例：<span class='font-mono'>https://item.rakuten.co.jp/...</span>
 
       tags:
         title: "タグの使い方・管理"

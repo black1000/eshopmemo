@@ -104,7 +104,7 @@ en:
       title: "Add Memo"
       submit: "Add"
       item_url: "Product URL"
-      url_text: "Enter the product page URL"
+      url_text: "Enter a product URL starting with https:// (If you paste shared text, keep only the URL.)"
       item_title: "Title"
       item_text: "Enter the product title"
       image: "Product Image"
@@ -214,6 +214,11 @@ en:
         text1: "Enter the URL of a product, and its name and image will be fetched automatically."
         text2: "You can freely add a reason for wanting it or other notes."
         notice_html: "※ On Amazon or some official brand sites, images may not be fetched automatically due to <strong class='font-semibold'>security settings</strong>.<br>In that case, you can manually add an image from the <span class='font-semibold text-yellow-600'>product edit page</span>."
+        url_notice_html: >
+          <strong class='font-semibold'>About entering URLs</strong><br>
+          Please enter a URL that starts with <span class='font-semibold'>https://</span>.<br>
+          If you paste shared text from shopping apps (product name + URL), keep only the URL part.<br>
+          Example: <span class='font-mono'>https://item.rakuten.co.jp/...</span>
 
       tags:
         title: "How to Use and Manage Tags"
