@@ -3,7 +3,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     auth = request.env["omniauth.auth"]
 
   if auth.blank?
-    redirect_to unauthenticated_root_path, 
+    redirect_to unauthenticated_root_path,
     alert: t("devise.omniauth_callbacks.google_oauth2.failure")
     return
   end

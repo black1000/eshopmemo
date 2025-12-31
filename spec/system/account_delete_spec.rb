@@ -19,6 +19,9 @@ RSpec.describe "AccountDelete", type: :system do
     # ログインしていることだけ確認
     expect(page).to have_content("ログイン中")
 
+    # CSRFトークンを取ってからDELETEする
+    token = page.find("meta[name='csrf-token']", visible: false)[:content]
+
     # 直接 DELETE を送る
     page.driver.submit :delete, user_registration_path, {}
 
