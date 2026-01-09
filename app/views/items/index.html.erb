@@ -103,8 +103,8 @@
         </tr>
       </thead>
     <tbody>
-      <% date = first_day.beginning_of_week %>
-      <% end_week = last_day.end_of_week %>
+      <% date = first_day.beginning_of_week(:sunday) %>
+      <% end_week = last_day.end_of_week(:sunday) %>
 
       <% while date <= end_week do %>
         <tr>
