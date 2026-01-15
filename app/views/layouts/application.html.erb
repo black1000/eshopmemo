@@ -58,5 +58,17 @@
         });
       </script>
     <% end %>
+    <script>
+      document.addEventListener("turbo:load", () => {
+        if (!window.gtag) return;
+
+        gtag("event", "page_view", {
+        page_location: window.location.href,
+        page_path: window.location.pathname + window.location.search,
+        page_title: document.title
+        });
+      });
+    </script>
+
   </body>
 </html>
