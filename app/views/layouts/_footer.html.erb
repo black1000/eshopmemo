@@ -3,9 +3,14 @@
     <span>©<%= Time.current.year %> eShopMemo</span>
   </div>
   <div class="footer-bottom">
-    <span class="footer-link text-gray-400 cursor-not-allowed">
-      <%= t('layouts.footer.terms_text') %>
-    </span>
+<% if false %>
+  <span class="footer-link text-gray-400 cursor-not-allowed">
+    <%= t('layouts.footer.terms_text') %>
+  </span>
+<% end %>
+
+<%= link_to t('layouts.footer.terms_text'), terms_path, class: "footer-link" %>
+
     <%= link_to t('layouts.footer.privacy'), "https://kiyac.app/privacypolicy/C8yKS2avA5J8Yw9s4cla", 
                 class: "footer-link", target: "_blank", rel: "noopener" %>
     <%= link_to t('layouts.footer.contact'), "https://forms.gle/icNJ3JjUTEaXdYV2A", 
