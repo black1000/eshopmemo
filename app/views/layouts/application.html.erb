@@ -55,7 +55,7 @@
         document.addEventListener("turbo:load", () => {
           const ev = <%= raw flash[:ga_event].to_json %>;
           if (window.trackEvent) window.trackEvent(ev.name, ev.params || {});
-        });
+        }, { once: true });
       </script>
     <% end %>
     <script>
