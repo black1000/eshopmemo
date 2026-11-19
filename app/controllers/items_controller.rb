@@ -116,6 +116,7 @@ class ItemsController < ApplicationController
     )
   end
 
+  flash[:ga_event] = { name: "add_to_wishlist" }
   redirect_to items_path, notice: t("items.create.success")
     else
   render :new
