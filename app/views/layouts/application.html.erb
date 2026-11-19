@@ -55,20 +55,8 @@
         document.addEventListener("turbo:load", () => {
           const ev = <%= raw flash[:ga_event].to_json %>;
           if (window.trackEvent) window.trackEvent(ev.name, ev.params || {});
-        });
+        }, { once: true });
       </script>
     <% end %>
-    <script>
-      document.addEventListener("turbo:load", () => {
-        if (!window.gtag) return;
-
-        gtag("event", "page_view", {
-        page_location: window.location.href,
-        page_path: window.location.pathname + window.location.search,
-        page_title: document.title
-        });
-      });
-    </script>
-
   </body>
 </html>
